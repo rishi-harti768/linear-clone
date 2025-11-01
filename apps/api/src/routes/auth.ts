@@ -63,7 +63,7 @@ auth.post('/register', async (c) => {
             error: {
               code: 'VALIDATION_ERROR',
               message: 'Invalid input data',
-              details: error,
+              details: process.env.NODE_ENV === 'development' ? error : undefined,
             },
           },
           422
@@ -127,7 +127,7 @@ auth.post('/login', async (c) => {
             error: {
               code: 'VALIDATION_ERROR',
               message: 'Invalid input data',
-              details: error,
+              details: process.env.NODE_ENV === 'development' ? error : undefined,
             },
           },
           422

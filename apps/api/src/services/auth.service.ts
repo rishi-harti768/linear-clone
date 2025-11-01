@@ -1,6 +1,6 @@
 import { db } from '@repo/database/client';
 import { type SafeUser, sessions, users } from '@repo/database/schema';
-import { eq } from 'drizzle-orm';
+import { eq, lt } from 'drizzle-orm';
 import {
   comparePassword,
   generateSessionToken,
@@ -186,7 +186,7 @@ export async function getUserById(userId: string): Promise<SafeUser> {
  */
 export async function cleanupExpiredSessions(): Promise<void> {
   try {
-    await db.delete(sessions).where(eq(sessions.expiresAt, new Date()));
+    await db.delete(sessions).where(lt(sessions.expiresAt, new Date()));
   } catch (error) {
     console.error('Cleanup expired sessions error:', error);
     throw error;

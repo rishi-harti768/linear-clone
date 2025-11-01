@@ -188,10 +188,34 @@ npm run db:push
 npm run db:studio
 ```
 
-## 📚 Documentation
+## � Security
+
+### Authentication System
+- **JWT Tokens**: 7-day expiration with secure signing
+- **Password Hashing**: Bcrypt with cost factor 12
+- **Session Management**: Database-backed session tokens
+- **Environment Security**: 
+  - Production deployment fails if `JWT_SECRET` is not set
+  - Development shows warnings for missing environment variables
+- **Error Sanitization**: 
+  - Production: No sensitive information in error responses
+  - Development: Full error details for debugging
+
+### Security Best Practices
+- ✅ No hardcoded secrets in production
+- ✅ Expired session cleanup mechanism
+- ✅ Input validation with Zod schemas
+- ✅ Type-safe database queries (no SQL injection)
+- ✅ Password hash stored securely (never exposed in API responses)
+
+See [CODE_REVIEW_FIXES.md](./CODE_REVIEW_FIXES.md) for recent security improvements.
+
+## �📚 Documentation
 
 - [AGENTS.md](./AGENTS.md) - Comprehensive implementation guide and feature requirements
 - [.github/copilot-instructions.md](./.github/copilot-instructions.md) - Development guidelines and best practices
+- [CODE_REVIEW_FIXES.md](./CODE_REVIEW_FIXES.md) - Security improvements and code review responses
+- [TESTING.md](./TESTING.md) - Testing guide and manual API testing instructions
 - [apps/api/README.md](./apps/api/README.md) - Backend API documentation
 - [packages/database/README.md](./packages/database/README.md) - Database setup and schema docs
 

@@ -9,7 +9,19 @@ import jwt from 'jsonwebtoken';
 export const authConfig = {
   // JWT settings
   jwt: {
-    secret: process.env.JWT_SECRET || 'your-secret-key-change-in-production',
+    secret: (() => {
+      const secret = process.env.JWT_SECRET;
+      if (!secret) {
+        if (process.env.NODE_ENV === 'production') {
+          throw new Error('JWT_SECRET environment variable is required in production');
+        }
+        console.warn(
+          '⚠️  WARNING: Using default JWT_SECRET. Set JWT_SECRET environment variable for production!'
+        );
+        return 'your-secret-key-change-in-production';
+      }
+      return secret;
+    })(),
     expiresIn: '7d', // Access token expires in 7 days
   },
 
