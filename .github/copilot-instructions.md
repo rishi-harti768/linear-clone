@@ -46,17 +46,23 @@ linear-clone/
 
 **Removed**: `docs` app (unnecessary for Linear clone), `eslint-config` package (replaced with Biome.js)
 
-**Phase 2 Complete**: Database package includes 15 tables (users, workspaces, teams, projects, cycles, issues, labels, comments, attachments, activity logs, notifications), 17 performance indexes, transaction utilities, and query builders.
+**Phase 1 & 2 Complete**:
+
+- Phase 1: Turborepo setup, Biome.js, Vitest, Next.js with Tailwind v4, Hono.js backend, database package
+- Phase 2: Database schema with 15 tables (users, workspaces, teams, projects, cycles, issues, labels, comments, attachments, activity logs, notifications), 17 performance indexes, transaction utilities, query builders
+
+**Current State**: Fresh Next.js 16 + Tailwind CSS v4 app with minimal scaffolding, ready for Linear clone UI development
 
 ### Technology Stack
 
 **Current**:
 
 - Package Manager: npm (v11.6.2, specified in `package.json`)
-- Build System: Turborepo 2.6.0
-- Frontend: Next.js 16 with React 19, App Router
-- TypeScript: 5.9.2 (strict mode enabled)
-- Code Quality: Biome.js (linting & formatting)
+- Build System: Turborepo 2.3.0
+- Frontend: Next.js 16.0.1 with React 19.2.0, App Router
+- Styling: Tailwind CSS 4.1.16 (latest v4)
+- TypeScript: 5.x (strict mode enabled)
+- Code Quality: Biome.js 1.9.4 (root) + 2.2.0 (apps/web for compatibility)
 
 **Planned** (per `AGENTS.md`):
 
@@ -64,9 +70,9 @@ linear-clone/
 - Database: PostgreSQL with Drizzle ORM
 - Auth: Better Auth
 - Testing: Vitest (comprehensive test coverage required)
-- Styling: Tailwind CSS
-- UI: Radix UI primitives
-- State: Zustand
+- UI: Radix UI primitives (to be installed)
+- State: Zustand (to be installed)
+- Forms: React Hook Form + Zod (to be installed)
 
 ## Development Workflows
 
@@ -102,6 +108,7 @@ npm run check-types
 - **Always use `npx turbo` or `npm run`** - Global turbo is not required
 - **Use filters** for specific packages: `--filter=web`, `--filter=@repo/ui`
 - **Cache behavior**: Turbo caches builds automatically (see `turbo.json`)
+- **Note**: Root-level lint task is `//#lint` (workspace-specific format) in turbo.json
 
 ### Package Management
 

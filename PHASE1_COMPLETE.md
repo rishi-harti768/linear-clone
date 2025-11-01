@@ -26,19 +26,25 @@
 
 ### 4. Setup Frontend Dependencies (apps/web)
 
-- ✅ Installed Tailwind CSS with PostCSS and Autoprefixer
+**Original Phase 1 Completion**:
+
+- ✅ Installed Tailwind CSS 3.x with PostCSS and Autoprefixer
 - ✅ Installed Radix UI components (@radix-ui/\*)
 - ✅ Installed Lucide React for icons
 - ✅ Installed Zustand for state management
 - ✅ Installed React Hook Form + Zod for forms
 - ✅ Installed date-fns for date handling
 - ✅ Configured Tailwind with Linear-inspired design tokens
-- ✅ Created `tailwind.config.ts` with theme configuration
-- ✅ Created `postcss.config.mjs`
-- ✅ Updated `globals.css` with CSS variables and Tailwind directives
-- ✅ Installed testing libraries (@testing-library/react, jsdom, etc.)
-- ✅ Created `vitest.config.ts` for frontend testing
-- ✅ Created `vitest.setup.ts` with jest-dom
+- ✅ Created testing infrastructure
+
+**Updated (Manual Changes)**:
+
+- ✅ **Migrated to Tailwind CSS 4.1.16** (latest v4 with CSS-first architecture)
+- ✅ **Upgraded to Next.js 16.0.1** and React 19.2.0
+- ✅ Simplified postcss.config.mjs for v4 (@tailwindcss/postcss only)
+- ✅ Updated globals.css with `@import "tailwindcss"` and `@theme inline`
+- ✅ Removed old dependencies (Radix UI, Zustand, React Hook Form temporarily)
+- ✅ Fresh scaffolding with minimal Geist fonts setup
 
 ### 5. Created Backend App (apps/api)
 
@@ -76,7 +82,7 @@
 - ✅ Updated `turbo.json` with complete pipeline:
   - `build` task with proper outputs
   - `dev` task for development servers
-  - `lint` task for code quality checks
+  - `//#lint` task for root-level linting (workspace-specific format)
   - `check-types` task for TypeScript
   - `test` task for running tests
   - `test:watch` task for watch mode
@@ -213,31 +219,52 @@ npm run build                # Build all apps
 
 ### Root
 
-- @biomejs/biome
-- vitest, @vitest/ui, @vitest/coverage-v8
+- @biomejs/biome@^1.9.4
+- vitest@^2.1.4, @vitest/ui@^2.1.4, @vitest/coverage-v8@^2.1.4
+- prettier@^3.3.3 (for compatibility)
+- turbo@^2.3.0
+- typescript@^5.6.3
 
-### apps/web
+### apps/web (Current State)
 
-- Tailwind CSS, PostCSS, Autoprefixer
-- Radix UI components (dialog, dropdown, select, popover, etc.)
+- **Next.js 16.0.1** with React 19.2.0 (latest)
+- **Tailwind CSS 4.1.16** with @tailwindcss/postcss@^4
+- TypeScript 5.x
+- @biomejs/biome@2.2.0 (local for compatibility)
+- next/font (Geist Sans, Geist Mono)
+
+**Removed** (ready to reinstall as needed):
+
+- Radix UI components (all removed)
 - lucide-react
 - zustand
 - react-hook-form, zod, @hookform/resolvers
 - date-fns
-- @testing-library/react, @testing-library/jest-dom, @testing-library/user-event, jsdom
+- Testing libraries (@testing-library/react, jsdom, etc.)
 
 ### apps/api
 
-- hono, @hono/node-server
+- hono@^4.6.11, @hono/node-server
 - ws, cors, dotenv
 - tsx, supertest
 
 ### packages/database
 
-- drizzle-orm, drizzle-kit
-- postgres
+- drizzle-orm@^0.36.4, drizzle-kit@^0.28.1
+- postgres@^3.4.7
 - dotenv, tsx
 
-## ✨ Phase 1 Complete!
+## ✨ Phase 1 Complete! (Updated)
 
 All tasks from Phase 1 of AGENTS.md have been successfully completed. The project is now ready for Phase 2: Database Schema Design.
+
+### Recent Updates (Manual Changes)
+
+- ✅ **Migrated to Tailwind CSS v4** (4.1.16) - Latest CSS-first architecture
+- ✅ **Upgraded to Next.js 16.0.1** and React 19.2.0 (canary)
+- ✅ **Fresh scaffolding** - Removed old template code for clean Linear clone UI
+- ✅ **Simplified postcss config** - v4 uses @tailwindcss/postcss only
+- ✅ **Updated turbo.json** - Changed `lint` to `//#lint` (workspace format)
+- ✅ **Cleaned dependencies** - Removed unused packages, ready for fresh implementation
+
+**Next**: Implement Linear-inspired UI with Tailwind v4 utilities and custom design system

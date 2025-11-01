@@ -4,19 +4,20 @@ A high-fidelity fullstack clone of Linear.app built with modern technologies foc
 
 ## 🚀 Technology Stack
 
-- **Package Manager**: npm (v11.6.2)
-- **Build System**: Turborepo 2.6.0
-- **Frontend**: Next.js 16 with React 19 (App Router)
-- **Backend**: Hono.js
-- **Database**: PostgreSQL with Drizzle ORM
+- **Package Manager**: npm 11.6.2
+- **Build System**: Turborepo 2.3.0
+- **Frontend**: Next.js 16.0.1 with React 19.2.0 (App Router)
+- **Backend**: Hono.js 4.6.11
+- **Database**: PostgreSQL with Drizzle ORM 0.36.4
+- **Styling**: **Tailwind CSS 4.1.16** (v4 - CSS-first architecture)
+- **Code Quality**: Biome.js 1.9.4 (root) + 2.2.0 (web)
+- **Testing**: Vitest 2.1.4
+- **TypeScript**: 5.6.3
 - **Auth**: Better Auth (planned)
-- **Code Quality**: Biome.js (linting & formatting)
-- **Testing**: Vitest
-- **Styling**: Tailwind CSS
-- **UI Components**: Radix UI
-- **State Management**: Zustand
-- **Forms**: React Hook Form + Zod
-- **Icons**: Lucide React
+- **UI Components**: Radix UI (to be installed)
+- **State Management**: Zustand (to be installed)
+- **Forms**: React Hook Form + Zod (to be installed)
+- **Icons**: Lucide React (to be installed)
 
 ## 📁 Project Structure
 
