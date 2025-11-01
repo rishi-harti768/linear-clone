@@ -1,12 +1,7 @@
 import { Hono } from 'hono';
 import { authMiddleware } from '../middleware/auth';
 import { loginSchema, registerSchema } from '../schemas/auth.schema';
-import {
-  getUserById,
-  loginUser,
-  logoutUser,
-  registerUser,
-} from '../services/auth.service';
+import { getUserById, loginUser, logoutUser, registerUser } from '../services/auth.service';
 
 /**
  * Authentication Routes
@@ -42,7 +37,7 @@ auth.post('/register', async (c) => {
           token: result.token,
         },
       },
-      201,
+      201
     );
   } catch (error) {
     console.error('Register error:', error);
@@ -57,7 +52,7 @@ auth.post('/register', async (c) => {
               message: error.message,
             },
           },
-          409,
+          409
         );
       }
 
@@ -71,7 +66,7 @@ auth.post('/register', async (c) => {
               details: error,
             },
           },
-          422,
+          422
         );
       }
     }
@@ -83,7 +78,7 @@ auth.post('/register', async (c) => {
           message: 'Failed to register user',
         },
       },
-      500,
+      500
     );
   }
 });
@@ -121,7 +116,7 @@ auth.post('/login', async (c) => {
               message: error.message,
             },
           },
-          401,
+          401
         );
       }
 
@@ -135,7 +130,7 @@ auth.post('/login', async (c) => {
               details: error,
             },
           },
-          422,
+          422
         );
       }
     }
@@ -147,7 +142,7 @@ auth.post('/login', async (c) => {
           message: 'Failed to login',
         },
       },
-      500,
+      500
     );
   }
 });
@@ -169,7 +164,7 @@ auth.post('/logout', authMiddleware, async (c) => {
             message: 'Session token is required',
           },
         },
-        400,
+        400
       );
     }
 
@@ -182,7 +177,7 @@ auth.post('/logout', authMiddleware, async (c) => {
           message: 'Logged out successfully',
         },
       },
-      200,
+      200
     );
   } catch (error) {
     console.error('Logout error:', error);
@@ -194,7 +189,7 @@ auth.post('/logout', authMiddleware, async (c) => {
           message: 'Failed to logout',
         },
       },
-      500,
+      500
     );
   }
 });
@@ -215,7 +210,7 @@ auth.get('/me', authMiddleware, async (c) => {
             message: 'User not authenticated',
           },
         },
-        401,
+        401
       );
     }
 
@@ -238,7 +233,7 @@ auth.get('/me', authMiddleware, async (c) => {
             message: 'User not found',
           },
         },
-        404,
+        404
       );
     }
 
@@ -249,7 +244,7 @@ auth.get('/me', authMiddleware, async (c) => {
           message: 'Failed to get current user',
         },
       },
-      500,
+      500
     );
   }
 });

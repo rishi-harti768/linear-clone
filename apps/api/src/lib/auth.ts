@@ -1,6 +1,6 @@
+import { randomUUID } from 'node:crypto';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { randomUUID } from 'node:crypto';
 
 /**
  * Authentication configuration
@@ -39,10 +39,7 @@ export async function hashPassword(password: string): Promise<string> {
  * @param hash - Hashed password
  * @returns True if password matches hash
  */
-export async function comparePassword(
-  password: string,
-  hash: string,
-): Promise<boolean> {
+export async function comparePassword(password: string, hash: string): Promise<boolean> {
   return bcrypt.compare(password, hash);
 }
 

@@ -2,13 +2,13 @@ import { describe, expect, it } from 'vitest';
 
 /**
  * Integration tests for authentication routes
- * 
+ *
  * Note: These are placeholder tests. Full integration tests require:
  * 1. Test database setup (separate from production)
  * 2. Database seeding/cleanup between tests
  * 3. HTTP client that works with Hono's fetch API
  * 4. Environment variable configuration for tests
- * 
+ *
  * For now, we verify the auth library functions work correctly.
  * Integration tests should be implemented as part of Phase 5 (Testing).
  */

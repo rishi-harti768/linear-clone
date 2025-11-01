@@ -18,7 +18,7 @@ export async function authMiddleware(c: Context, next: Next) {
             message: 'Authorization header is required',
           },
         },
-        401,
+        401
       );
     }
 
@@ -32,7 +32,7 @@ export async function authMiddleware(c: Context, next: Next) {
             message: 'Authorization header must be in format: Bearer <token>',
           },
         },
-        401,
+        401
       );
     }
 
@@ -46,7 +46,7 @@ export async function authMiddleware(c: Context, next: Next) {
             message: 'Token is missing',
           },
         },
-        401,
+        401
       );
     }
 
@@ -63,7 +63,7 @@ export async function authMiddleware(c: Context, next: Next) {
             message,
           },
         },
-        401,
+        401
       );
     }
 
@@ -81,7 +81,7 @@ export async function authMiddleware(c: Context, next: Next) {
           message: 'Authentication failed',
         },
       },
-      500,
+      500
     );
   }
 }

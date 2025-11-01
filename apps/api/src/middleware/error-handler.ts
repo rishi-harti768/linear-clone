@@ -22,7 +22,7 @@ export function errorHandler(error: Error, c: Context) {
           message: error.message,
         },
       },
-      404,
+      404
     );
   }
 
@@ -34,7 +34,7 @@ export function errorHandler(error: Error, c: Context) {
           message: error.message,
         },
       },
-      409,
+      409
     );
   }
 
@@ -46,7 +46,7 @@ export function errorHandler(error: Error, c: Context) {
           message: error.message,
         },
       },
-      401,
+      401
     );
   }
 
@@ -58,7 +58,7 @@ export function errorHandler(error: Error, c: Context) {
           message: error.message,
         },
       },
-      403,
+      403
     );
   }
 
@@ -70,7 +70,7 @@ export function errorHandler(error: Error, c: Context) {
         message: 'An unexpected error occurred',
       },
     },
-    500,
+    500
   );
 }
 
@@ -86,6 +86,6 @@ export function notFoundHandler(c: Context) {
         message: 'Route not found',
       },
     },
-    404,
+    404
   );
 }

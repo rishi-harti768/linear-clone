@@ -1,5 +1,5 @@
 import { db } from '@repo/database/client';
-import { sessions, users, type SafeUser } from '@repo/database/schema';
+import { type SafeUser, sessions, users } from '@repo/database/schema';
 import { eq } from 'drizzle-orm';
 import {
   comparePassword,
