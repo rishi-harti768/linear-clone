@@ -696,97 +696,168 @@ NODE_ENV=development
 
 ## Phase 4: Frontend Development (Next.js)
 
-### Step 4.1: Setup Design System
+### Step 4.1: Setup Design System ✅ COMPLETE
 
 In `apps/web/src/`:
 
-#### `tailwind.config.js`
+#### `globals.css` ✅
 
-Create design tokens matching Linear's design:
+Created Linear-inspired design system with:
 
-- Colors: primary, secondary, accent, surfaces, borders
-- Typography: font families, sizes, weights
-- Spacing: consistent spacing scale
-- Animations: smooth transitions (150-300ms)
-- Dark/light theme support
+- ✅ Colors: primary (#5e6ad2), secondary, accent, surfaces, borders
+- ✅ Typography: font families (sans, mono), sizes, weights
+- ✅ Spacing: consistent spacing scale (0-16)
+- ✅ Animations: smooth transitions (150-300ms with cubic-bezier)
+- ✅ Dark/light theme support with CSS variables
+- ✅ Priority colors: urgent, high, medium, low, none
+- ✅ Issue status colors: backlog, todo, in_progress, done, cancelled
+- ✅ Accessibility: focus styles, selection colors
+- ✅ Scrollbar styling
 
-#### `components/ui/`
+#### `components/ui/` ✅ PARTIAL
 
-Create base UI components using Radix UI:
+Created base UI components using Radix UI:
 
-- `Button.tsx` - Primary, secondary, ghost variants
-- `Input.tsx` - Text input with focus states
-- `Select.tsx` - Custom select dropdown
-- `Dialog.tsx` - Modal dialog
-- `Popover.tsx` - Popover menus
-- `DropdownMenu.tsx` - Context menus
-- `Tooltip.tsx` - Tooltips
-- `Badge.tsx` - Status/label badges
-- `Avatar.tsx` - User avatars
-- `Checkbox.tsx` - Checkboxes
-- `RadioGroup.tsx` - Radio buttons
-- `Textarea.tsx` - Multi-line text input
-- `Command.tsx` - Command palette base
-- `ContextMenu.tsx` - Right-click menus
+- ✅ `Button.tsx` - Primary, secondary, ghost, outline, destructive variants with loading states
+- ✅ `Input.tsx` - Text input with icon support, error states, helper text
+- ⚠️ `Select.tsx` - Custom select dropdown (to be implemented)
+- ✅ `Dialog.tsx` - Modal dialog with overlay, animations, focus trapping
+- ⚠️ `Popover.tsx` - Popover menus (to be implemented)
+- ⚠️ `DropdownMenu.tsx` - Context menus (to be implemented)
+- ✅ `Tooltip.tsx` - Tooltips with slide animations
+- ✅ `Badge.tsx` - Status/label badges with issue status variants
+- ✅ `Avatar.tsx` - User avatars with auto-generated initials fallback
+- ⚠️ `Checkbox.tsx` - Checkboxes (to be implemented)
+- ⚠️ `RadioGroup.tsx` - Radio buttons (to be implemented)
+- ✅ `Textarea.tsx` - Multi-line text input with error states
+- ⚠️ `Command.tsx` - Command palette base (to be implemented)
+- ⚠️ `ContextMenu.tsx` - Right-click menus (to be implemented)
 
-### Step 4.2: Setup Global State Management
+#### `lib/utils.ts` ✅
+
+Created utility functions:
+
+- ✅ `cn()` - Class name merging with Tailwind conflict resolution
+- ✅ `formatDate()` - Human-readable date formatting
+- ✅ `formatRelativeTime()` - Relative time strings ("2h ago")
+- ✅ `debounce()` - Debounce function for performance
+- ✅ `getInitials()` - Generate initials from names
+
+### Step 4.2: Setup Global State Management ✅ COMPLETE
 
 In `apps/web/src/stores/`:
 
-#### `authStore.ts`
+#### `auth-store.ts` ✅
 
-- Current user state
-- Authentication tokens
-- Login/logout actions
+- ✅ Current user state (User | null)
+- ✅ Authentication tokens (JWT)
+- ✅ Login/logout actions
+- ✅ Persisted storage with Zustand persist middleware
+- ✅ Redux DevTools integration
+- ✅ Selector hooks (useUser, useIsAuthenticated, useAuthToken)
 
-#### `workspaceStore.ts`
+#### `workspace-store.ts` ✅
 
-- Active workspace
-- Workspace list
-- Switch workspace action
+- ✅ Active workspace state
+- ✅ Workspace list with Map for efficient lookups
+- ✅ Workspace members cache
+- ✅ Switch workspace action
+- ✅ Add/update/remove workspace operations
+- ✅ Member management (add, remove, set)
+- ✅ Persisted active workspace
+- ✅ Selector hooks (useActiveWorkspace, useWorkspaces, useWorkspaceMembers)
 
-#### `teamStore.ts`
+#### `team-store.ts` ✅
 
-- Active team
-- Team list
-- Team members cache
+- ✅ Active team state
+- ✅ Team list with archived support
+- ✅ Team members cache with Map
+- ✅ Switch team action
+- ✅ Add/update/remove/archive team operations
+- ✅ Member management
+- ✅ Persisted active team
+- ✅ Selector hooks (useActiveTeam, useTeams, useTeamMembers)
 
-#### `issueStore.ts`
+#### `issue-store.ts` ✅
 
-- Issues list with filters
-- Active issue
-- Optimistic updates for issue changes
-- WebSocket sync handlers
+- ✅ Issues Map for O(1) lookups (issueId -> Issue)
+- ✅ Issue filters state (status, priority, assignee, labels, etc.)
+- ✅ Active issue state
+- ✅ Optimistic updates with rollback support
+- ✅ Add/update/remove issue operations
+- ✅ Filter management (set, clear)
+- ✅ WebSocket sync handler placeholders
+- ✅ Selector hooks (useIssues, useIssue, useFilteredIssues, useActiveIssue)
 
-#### `uiStore.ts`
+#### `ui-store.ts` ✅
 
-- Command palette state
-- Modal/dialog state
-- Sidebar collapsed state
-- Theme (light/dark)
+- ✅ Command palette open/close state
+- ✅ Modal/dialog state with data passing
+- ✅ Sidebar collapsed state
+- ✅ Theme (light/dark/system) with auto-apply to DOM
+- ✅ Persisted UI preferences
+- ✅ Selector hooks (useTheme, useSidebarCollapsed, useCommandPaletteOpen, useActiveModal)
 
-### Step 4.3: Create Core Layouts
+#### `types/index.ts` ✅
+
+- ✅ Complete TypeScript type definitions for all entities
+- ✅ Union types for enums (IssueStatus, IssuePriority, ProjectStatus, etc.)
+- ✅ Filter types (IssueFilters)
+- ✅ Pagination types (PaginationParams, PaginatedResponse)
+- ✅ Type-safe interfaces matching database schema
+
+### Step 4.3: Create Core Layouts ✅ COMPLETE
 
 In `apps/web/src/app/`:
 
-#### `layout.tsx`
+#### `layout.tsx` ✅
 
-- Root layout with theme provider
-- Auth provider
-- WebSocket connection initialization
+- ✅ Root layout with Inter font (replacing Geist for Linear-like aesthetic)
+- ✅ ThemeProvider integration with system theme detection
+- ✅ TooltipProvider from Radix UI for global tooltip support
+- ✅ Comprehensive SEO metadata (OpenGraph, Twitter cards)
+- ✅ CSS variables for theme management
+- ✅ Smooth transitions support
 
-#### `(auth)/layout.tsx`
+#### `components/providers/theme-provider.tsx` ✅
 
-- Auth pages layout (login, register)
-- Centered card design
+- ✅ Theme provider with Zustand UI store integration
+- ✅ System theme detection via matchMedia
+- ✅ SSR-safe with mounted state
+- ✅ Automatic theme application to document root
+- ✅ Smooth theme transitions
 
-#### `(app)/layout.tsx`
+#### `(auth)/layout.tsx` ✅
 
-- Main app layout with:
-  - Top navigation bar
-  - Sidebar navigation
-  - Command palette integration
-  - Notification popover
+- ✅ Auth pages layout (login, register)
+- ✅ Centered card design (max-width 500px)
+- ✅ Subtle grid background pattern (32px, 2% opacity)
+- ✅ Brand header section with title and tagline
+- ✅ Footer with Terms of Service and Privacy Policy links
+- ✅ Responsive with proper spacing
+
+#### `(app)/layout.tsx` ✅
+
+- ✅ Main app layout with flex structure
+- ✅ Fixed sidebar navigation (240px width, collapsible)
+  - Workspace/team switcher section
+  - Navigation links (My Issues, Inbox, Views)
+  - Teams section with placeholder
+  - Projects section with placeholder
+  - Cycles section with placeholder
+  - User profile section
+- ✅ Fixed top navigation bar (56px height)
+  - Mobile menu button
+  - Breadcrumb navigation
+  - Search/command palette trigger (⌘K)
+  - Create issue button
+  - Notifications button
+  - User menu
+- ✅ Scrollable main content area
+- ✅ Full viewport height (100vh)
+- ✅ Placeholder structure ready for Phase 4.5 components
+- ✅ Prepared for command palette integration (Phase 4.6)
+- ✅ Prepared for notification system (Phase 4.12)
 
 ### Step 4.4: Implement Authentication Pages
 

@@ -46,12 +46,15 @@ linear-clone/
 
 **Removed**: `docs` app (unnecessary for Linear clone), `eslint-config` package (replaced with Biome.js)
 
-**Phase 1 & 2 Complete**:
+**Phase 1, 2, & 4.1-4.3 Complete**:
 
 - Phase 1: Turborepo setup, Biome.js, Vitest, Next.js with Tailwind v4, Hono.js backend, database package
 - Phase 2: Database schema with 15 tables (users, workspaces, teams, projects, cycles, issues, labels, comments, attachments, activity logs, notifications), 17 performance indexes, transaction utilities, query builders
+- Phase 4.1: Design system with Linear-inspired tokens (200+ CSS variables), dark/light theme, priority colors
+- Phase 4.2: State management (5 Zustand stores), 8 UI components (Button, Input, Dialog, Avatar, Badge, Tooltip, Textarea), utility functions
+- Phase 4.3: Core layouts (root layout with providers, authentication layout, main app layout with sidebar + top nav)
 
-**Current State**: Fresh Next.js 16 + Tailwind CSS v4 app with minimal scaffolding, ready for Linear clone UI development
+**Current State**: Frontend foundation complete with design system, state management, and layout structure. Ready for Phase 4.4 (authentication pages) and 4.5 (navigation components).
 
 ### Technology Stack
 

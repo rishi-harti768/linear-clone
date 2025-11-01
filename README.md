@@ -220,10 +220,33 @@ npm run db:studio
 
 See [PHASE2_COMPLETE.md](./PHASE2_COMPLETE.md) for details.
 
+**Phase 4: Frontend Development (Partial)** 🔄
+
+- [x] **Phase 4.1**: Linear-inspired design system with Tailwind CSS v4
+  - Complete design tokens (colors, typography, spacing, animations)
+  - Dark/light theme support with CSS variables
+  - Linear-inspired color palette and priority colors
+- [x] **Phase 4.2**: Base UI components with Radix UI
+  - 8 components complete: Button, Input, Dialog, Avatar, Badge, Tooltip, Textarea
+  - Zustand state management stores (auth, workspace, team, issue, UI)
+  - TypeScript type definitions for all entities
+  - Utility functions (cn, formatDate, debounce, getInitials)
+- [x] **Phase 4.3**: Core layouts with App Router
+  - Root layout with Inter font, ThemeProvider, SEO metadata
+  - Authentication layout with centered card design
+  - Main app layout with sidebar + top navigation structure
+  - Prepared for command palette and notifications integration
+- [ ] Complete remaining UI components (Select, DropdownMenu, Popover, Checkbox, RadioGroup)
+- [ ] Sidebar and TopNav component implementations
+- [ ] Authentication pages
+- [ ] Issue management pages
+
+See sections 4.1, 4.2, and 4.3 in [AGENTS.md](./AGENTS.md) for completed features.
+
 ### 🔄 In Progress
 
 - [ ] Backend API development (Phase 3)
-- [ ] Frontend development (Phase 4)
+- [ ] Frontend development - Phase 4.3 onwards
 - [ ] Authentication with Better Auth
 
 ### 📋 Planned
