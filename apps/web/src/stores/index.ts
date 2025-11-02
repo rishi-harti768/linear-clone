@@ -4,7 +4,7 @@
  */
 
 export * from './auth-store';
-export * from './workspace-store';
-export * from './team-store';
 export * from './issue-store';
+export * from './team-store';
 export * from './ui-store';
+export * from './workspace-store';

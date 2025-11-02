@@ -56,7 +56,7 @@ const initialState: TeamState = {
 export const useTeamStore = create<TeamState & TeamActions>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set, _get) => ({
         ...initialState,
 
         setTeams: (teams) => set({ teams }, false, 'team/setTeams'),

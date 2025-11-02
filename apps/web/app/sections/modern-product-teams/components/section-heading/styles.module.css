@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .top__container {
   @apply grid grid-cols-4 md:grid-cols-12 gap-6 mb-12;
 }

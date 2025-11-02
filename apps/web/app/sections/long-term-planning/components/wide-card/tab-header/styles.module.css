@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .tab__header {
   @apply col-start-1 col-end-5 text-[var(--color-text-quaternary)];
 }

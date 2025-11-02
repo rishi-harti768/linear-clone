@@ -325,8 +325,9 @@ See [PHASE2_COMPLETE.md](./PHASE2_COMPLETE.md) for database details.
   - Main app layout with sidebar + top navigation structure
   - Prepared for command palette and notifications integration
 - [ ] Complete remaining UI components (Select, DropdownMenu, Popover, Checkbox, RadioGroup)
-- [ ] Sidebar and TopNav component implementations
-- [ ] Authentication pages
+- [ ] Complete remaining UI components (Select, DropdownMenu, Popover, Checkbox, RadioGroup)
+- [x] Sidebar and TopNav component implementations
+- [x] Authentication pages
 - [ ] Issue management pages
 
 See sections 4.1, 4.2, and 4.3 in [AGENTS.md](./AGENTS.md) for completed features.

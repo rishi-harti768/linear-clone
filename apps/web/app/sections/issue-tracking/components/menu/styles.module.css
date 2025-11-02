@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .menu {
   @apply absolute top-[103px] left-[120px] min-w-[180px] backdrop-blur-md p-1 shadow-[var(--shadow-high)];
 

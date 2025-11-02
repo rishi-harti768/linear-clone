@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .test__to__issue__commands {
   @apply relative;
 }

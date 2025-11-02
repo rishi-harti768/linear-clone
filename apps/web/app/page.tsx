@@ -1,5 +1,5 @@
-import AmbientLighting from '@/components/ambient-lighting';
 import type { FC } from 'react';
+import AmbientLighting from '@/components/ambient-lighting';
 import Collaborate from './sections/collaborate';
 import Customers from './sections/customers';
 import Foundation from './sections/foundation';

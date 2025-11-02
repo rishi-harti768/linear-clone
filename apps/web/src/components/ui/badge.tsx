@@ -1,7 +1,7 @@
 'use client';
 
-import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 /**
@@ -66,6 +66,8 @@ export interface BadgeProps
  * ```
  */
 function Badge({ className, variant, icon, onRemove, children, ...props }: BadgeProps) {
+  const titleId = React.useId();
+
   return (
     <div className={cn(badgeVariants({ variant }), className)} {...props}>
       {icon && (
@@ -73,7 +75,7 @@ function Badge({ className, variant, icon, onRemove, children, ...props }: Badge
           {icon}
         </span>
       )}
-      <span>{children}</span>
+      <span className="truncate">{children}</span>
       {onRemove && (
         <button
           type="button"
@@ -87,7 +89,10 @@ function Badge({ className, variant, icon, onRemove, children, ...props }: Badge
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-labelledby={titleId}
           >
+            <title id={titleId}>Remove badge</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"

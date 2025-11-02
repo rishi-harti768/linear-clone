@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .customers {
   padding-block: 64px;
   display: block;

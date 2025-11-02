@@ -923,7 +923,7 @@ In `apps/web/src/app/(auth)/`:
 
 In `apps/web/src/components/layout/`:
 
-#### `Sidebar.tsx`
+#### `Sidebar.tsx` ✅
 
 - Workspace/team switcher dropdown
 - Navigation links: My Issues, Inbox, Views
@@ -933,13 +933,25 @@ In `apps/web/src/components/layout/`:
 - Settings link
 - User profile dropdown
 
-#### `TopNav.tsx`
+Implementation notes:
+- Collapsible state with persistent preference (64px collapsed / 256px expanded)
+- Workspace switcher with avatar and dropdown menu
+- Integration with `ui-store` and `workspace-store`
+
+#### `TopNav.tsx` ✅
 
 - Breadcrumb navigation
 - Search trigger (⌘K)
 - Notifications bell icon
 - Create issue button
 - User avatar menu
+
+Implementation notes:
+- Command palette trigger (⌘K) placeholder wired to `ui-store`
+- Notifications dropdown with unread badge and recent items
+- User menu with profile/settings/logout actions
+
+Status: ✅ Step 4.5 COMPLETE — Sidebar and TopNav implemented and integrated with stores
 
 ### Step 4.6: Implement Command Palette
 

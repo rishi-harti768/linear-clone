@@ -3,121 +3,49 @@
 import * as React from 'react';
 import { useUIStore } from '@/stores/ui-store';
 
-type ThemeProviderProps = {
+interface ThemeProviderProps {
   children: React.ReactNode;
-  attribute?: 'class' | 'data-theme';
-  defaultTheme?: 'light' | 'dark' | 'system';
+  attribute?: string;
+  defaultTheme?: string;
   enableSystem?: boolean;
   disableTransitionOnChange?: boolean;
-};
+}
 
 /**
- * Theme Provider Component
- * 
- * Manages theme state and applies it to the document.
- * Integrates with Zustand UI store for theme persistence.
- * Supports light, dark, and system themes.
- * 
- * Features:
- * - Automatic system theme detection
- * - Theme persistence via Zustand
- * - Smooth transitions (optional)
- * - SSR-safe with useEffect
- * 
- * @example
- * ```tsx
- * <ThemeProvider
- *   attribute="class"
- *   defaultTheme="system"
- *   enableSystem
- * >
- *   {children}
- * </ThemeProvider>
- * ```
+ * ThemeProvider - Manages theme state and applies to document
  */
 export function ThemeProvider({
   children,
-  attribute = 'class',
-  defaultTheme = 'system',
+  attribute: _attribute = 'class',
+  defaultTheme: _defaultTheme = 'system',
   enableSystem = true,
-  disableTransitionOnChange = false,
+  disableTransitionOnChange: _disableTransitionOnChange = false,
 }: ThemeProviderProps) {
-  const { theme, setTheme } = useUIStore();
   const [mounted, setMounted] = React.useState(false);
+  const theme = useUIStore((state) => state.theme);
 
-  // Initialize theme from store or default
+  // Apply theme to document root
   React.useEffect(() => {
     setMounted(true);
-    
-    // Set default theme if store is empty
-    if (!theme) {
-      setTheme(defaultTheme);
-    }
-  }, []);
-
-  // Apply theme to document
-  React.useEffect(() => {
-    if (!mounted) return;
-
     const root = document.documentElement;
-    
-    // Disable transitions temporarily if requested
-    if (disableTransitionOnChange) {
-      root.style.setProperty('transition', 'none');
-    }
 
     // Remove all theme classes
     root.classList.remove('light', 'dark');
 
-    let effectiveTheme = theme || defaultTheme;
-
-    // Handle system theme
-    if (effectiveTheme === 'system' && enableSystem) {
+    // Apply new theme
+    if (theme === 'system' && enableSystem) {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
         : 'light';
-      effectiveTheme = systemTheme;
-    }
-
-    // Apply theme class
-    if (attribute === 'class') {
-      root.classList.add(effectiveTheme);
-    } else {
-      root.setAttribute(attribute, effectiveTheme);
-    }
-
-    // Re-enable transitions
-    if (disableTransitionOnChange) {
-      setTimeout(() => {
-        root.style.removeProperty('transition');
-      }, 0);
-    }
-  }, [theme, defaultTheme, enableSystem, attribute, disableTransitionOnChange, mounted]);
-
-  // Listen for system theme changes
-  React.useEffect(() => {
-    if (!enableSystem || theme !== 'system') return;
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const handleChange = () => {
-      const root = document.documentElement;
-      const systemTheme = mediaQuery.matches ? 'dark' : 'light';
-      
-      root.classList.remove('light', 'dark');
       root.classList.add(systemTheme);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
+    } else {
+      root.classList.add(theme);
+    }
   }, [theme, enableSystem]);
 
   // Prevent flash of unstyled content
   if (!mounted) {
-    return null;
+    return <>{children}</>;
   }
 
   return <>{children}</>;

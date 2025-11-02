@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .hero {
   @apply pt-6 sm:pt-[72px] relative;
 }

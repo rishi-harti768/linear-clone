@@ -52,7 +52,7 @@ const initialState: WorkspaceState = {
 export const useWorkspaceStore = create<WorkspaceState & WorkspaceActions>()(
   devtools(
     persist(
-      (set, get) => ({
+      (set, _get) => ({
         ...initialState,
 
         setWorkspaces: (workspaces) => set({ workspaces }, false, 'workspace/setWorkspaces'),
