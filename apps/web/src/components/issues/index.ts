@@ -4,10 +4,8 @@
  */
 
 export { IssueCard } from './IssueCard';
-export { IssueRow } from './IssueRow';
 export { IssueFilters } from './IssueFilters';
+export { IssueForm } from './IssueForm';
 export { IssuePriorityIcon } from './IssuePriorityIcon';
+export { IssueRow } from './IssueRow';
 export { IssueStatusBadge } from './IssueStatusBadge';
-
-// TODO: Implement these components in future phases
-// export { IssueForm } from './IssueForm';

@@ -1,4 +1,6 @@
 import AmbientLighting from '@/components/ambient-lighting';
+import Footer from '@/components/footer';
+import Header from '@/components/header';
 import type { FC } from 'react';
 import Collaborate from './sections/collaborate';
 import Customers from './sections/customers';
