@@ -19,12 +19,13 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["./components/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/app/*": ["./app/*"],
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*", "./components/*"],
+      "@/lib/*": ["./src/lib/*", "./lib/*"],
+      "@/app/*": ["./app/*", "./src/app/*"],
       "@/assets/*": ["./assets/*"],
-      "@/stores/*": ["./stores/*"],
-      "@/hooks/*": ["./hooks/*"]
+      "@/stores/*": ["./src/stores/*"],
+      "@/types/*": ["./src/types/*"]
     },
     "target": "ES2017"
   },

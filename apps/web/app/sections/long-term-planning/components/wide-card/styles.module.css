@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .wide__card__tab {
   @apply grid grid-cols-4 md:grid-cols-12 gap-6;
 }

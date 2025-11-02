@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .prefooter {
   @apply bg-[linear-gradient(to_top,#141516,var(--color-bg-primary))] text-[var(--color-text-primary)];
   padding-block: 96px;

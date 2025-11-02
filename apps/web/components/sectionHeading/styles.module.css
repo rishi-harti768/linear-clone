@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .section__heading {
   @apply flex flex-col gap-4;
 }

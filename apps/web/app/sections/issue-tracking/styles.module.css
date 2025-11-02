@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .issue__tracking {
   @apply block isolate overflow-hidden py-[48px] sm:py-[160px];
 }

@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .sidebar .top__container {
   @apply flex items-center justify-between mb-[14px];
   padding-inline: 4px;

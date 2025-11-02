@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .header .header__blur__mask,
 .header .header__overlay {
   @apply fixed pointer-events-none z-[calc(var(--layer-header)-1)];

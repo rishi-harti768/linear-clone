@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .foundation {
   @apply relative isolate py-40 block;
 }

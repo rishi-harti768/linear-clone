@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .collaborative__docs {
   @apply relative;
 }

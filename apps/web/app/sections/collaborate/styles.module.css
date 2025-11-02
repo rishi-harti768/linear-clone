@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .collaborate {
   @apply block isolate py-[48px] sm:py-[160px] bg-[linear-gradient(180deg,rgba(97,106,115,0),rgba(97,106,115,.05)_40%,rgba(97,106,115,.05)_80%,rgba(97,106,115,0))];
 }
