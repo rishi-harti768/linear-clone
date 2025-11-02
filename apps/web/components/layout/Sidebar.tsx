@@ -2,7 +2,10 @@
 
 export function Sidebar() {
   return (
-    <aside className="w-64 h-screen border-r border-border bg-background p-4">
+    <aside
+      className="w-64 h-screen border-r border-border bg-background p-4"
+      aria-label="Main navigation"
+    >
       <div className="text-lg font-semibold mb-4">Linear Clone</div>
       <nav className="space-y-2">
         <div className="text-sm text-muted-foreground">Navigation placeholder</div>

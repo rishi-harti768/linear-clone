@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 type Theme = 'light' | 'dark';
 
@@ -26,55 +26,62 @@ interface UIActions {
 type UIStore = UIState & UIActions;
 
 export const useUIStore = create<UIStore>()(
-  persist(
-    (set, get) => ({
-      // State
-      theme: 'light',
-      sidebarCollapsed: false,
-      commandPaletteOpen: false,
-      activeModal: null,
-      modalData: null,
+  devtools(
+    persist(
+      (set, get) => ({
+        // State
+        theme: 'light',
+        sidebarCollapsed: false,
+        commandPaletteOpen: false,
+        activeModal: null,
+        modalData: null,
 
-      // Actions
-      setTheme: (theme) => {
-        set({ theme });
-        if (typeof window !== 'undefined') {
-          document.documentElement.classList.toggle('dark', theme === 'dark');
-        }
-      },
+        // Actions
+        setTheme: (theme) => {
+          set({ theme });
+          if (typeof window !== 'undefined') {
+            if (theme === 'dark') {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+          }
+        },
 
-      toggleTheme: () => {
-        const currentTheme = get().theme;
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        get().setTheme(newTheme);
-      },
+        toggleTheme: () => {
+          const currentTheme = get().theme;
+          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          get().setTheme(newTheme);
+        },
 
-      toggleSidebar: () =>
-        set((state) => ({
-          sidebarCollapsed: !state.sidebarCollapsed,
-        })),
+        toggleSidebar: () =>
+          set((state) => ({
+            sidebarCollapsed: !state.sidebarCollapsed,
+          })),
 
-      setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
+        setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
 
-      openCommandPalette: () => set({ commandPaletteOpen: true }),
+        openCommandPalette: () => set({ commandPaletteOpen: true }),
 
-      closeCommandPalette: () => set({ commandPaletteOpen: false }),
+        closeCommandPalette: () => set({ commandPaletteOpen: false }),
 
-      toggleCommandPalette: () =>
-        set((state) => ({
-          commandPaletteOpen: !state.commandPaletteOpen,
-        })),
+        toggleCommandPalette: () =>
+          set((state) => ({
+            commandPaletteOpen: !state.commandPaletteOpen,
+          })),
 
-      openModal: (modalId, data) => set({ activeModal: modalId, modalData: data ?? null }),
+        openModal: (modalId, data) => set({ activeModal: modalId, modalData: data ?? null }),
 
-      closeModal: () => set({ activeModal: null, modalData: null }),
-    }),
-    {
-      name: 'ui-storage',
-      partialize: (state) => ({
-        theme: state.theme,
-        sidebarCollapsed: state.sidebarCollapsed,
+        closeModal: () => set({ activeModal: null, modalData: null }),
       }),
-    }
+      {
+        name: 'ui-storage',
+        partialize: (state) => ({
+          theme: state.theme,
+          sidebarCollapsed: state.sidebarCollapsed,
+        }),
+      }
+    ),
+    { name: 'UIStore' }
   )
 );

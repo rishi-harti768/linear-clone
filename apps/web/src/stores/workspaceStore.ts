@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface Workspace {
   id: string;
@@ -27,39 +28,46 @@ interface WorkspaceActions {
 
 type WorkspaceStore = WorkspaceState & WorkspaceActions;
 
-export const useWorkspaceStore = create<WorkspaceStore>((set, get) => ({
-  // State
-  workspaces: [],
-  activeWorkspaceId: null,
-  isLoading: false,
+export const useWorkspaceStore = create<WorkspaceStore>()(
+  devtools(
+    (set, get) => ({
+      // State
+      workspaces: [],
+      activeWorkspaceId: null,
+      isLoading: false,
 
-  // Actions
-  setWorkspaces: (workspaces) => set({ workspaces }),
+      // Actions
+      setWorkspaces: (workspaces) => set({ workspaces }),
 
-  addWorkspace: (workspace) =>
-    set((state) => ({
-      workspaces: [...state.workspaces, workspace],
-    })),
+      addWorkspace: (workspace) =>
+        set((state) => ({
+          workspaces: [...state.workspaces, workspace],
+        })),
 
-  updateWorkspace: (id, updates) =>
-    set((state) => ({
-      workspaces: state.workspaces.map((workspace) =>
-        workspace.id === id ? { ...workspace, ...updates } : workspace
-      ),
-    })),
+      updateWorkspace: (id, updates) =>
+        set((state) => ({
+          workspaces: state.workspaces.map((workspace) =>
+            workspace.id === id ? { ...workspace, ...updates } : workspace
+          ),
+        })),
 
-  removeWorkspace: (id) =>
-    set((state) => ({
-      workspaces: state.workspaces.filter((workspace) => workspace.id !== id),
-      activeWorkspaceId: state.activeWorkspaceId === id ? null : state.activeWorkspaceId,
-    })),
+      removeWorkspace: (id) =>
+        set((state) => ({
+          workspaces: state.workspaces.filter((workspace) => workspace.id !== id),
+          activeWorkspaceId: state.activeWorkspaceId === id ? null : state.activeWorkspaceId,
+        })),
 
-  setActiveWorkspace: (id) => set({ activeWorkspaceId: id }),
+      setActiveWorkspace: (id) => set({ activeWorkspaceId: id }),
 
-  getActiveWorkspace: () => {
-    const state = get();
-    return state.workspaces.find((workspace) => workspace.id === state.activeWorkspaceId) || null;
-  },
+      getActiveWorkspace: () => {
+        const state = get();
+        return (
+          state.workspaces.find((workspace) => workspace.id === state.activeWorkspaceId) || null
+        );
+      },
 
-  setLoading: (isLoading) => set({ isLoading }),
-}));
+      setLoading: (isLoading) => set({ isLoading }),
+    }),
+    { name: 'WorkspaceStore' }
+  )
+);

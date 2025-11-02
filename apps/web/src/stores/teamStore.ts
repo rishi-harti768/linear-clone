@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface Team {
   id: string;
@@ -46,55 +47,60 @@ interface TeamActions {
 
 type TeamStore = TeamState & TeamActions;
 
-export const useTeamStore = create<TeamStore>((set, get) => ({
-  // State
-  teams: [],
-  activeTeamId: null,
-  teamMembersCache: new Map(),
-  isLoading: false,
+export const useTeamStore = create<TeamStore>()(
+  devtools(
+    (set, get) => ({
+      // State
+      teams: [],
+      activeTeamId: null,
+      teamMembersCache: new Map(),
+      isLoading: false,
 
-  // Actions
-  setTeams: (teams) => set({ teams }),
+      // Actions
+      setTeams: (teams) => set({ teams }),
 
-  addTeam: (team) =>
-    set((state) => ({
-      teams: [...state.teams, team],
-    })),
+      addTeam: (team) =>
+        set((state) => ({
+          teams: [...state.teams, team],
+        })),
 
-  updateTeam: (id, updates) =>
-    set((state) => ({
-      teams: state.teams.map((team) => (team.id === id ? { ...team, ...updates } : team)),
-    })),
+      updateTeam: (id, updates) =>
+        set((state) => ({
+          teams: state.teams.map((team) => (team.id === id ? { ...team, ...updates } : team)),
+        })),
 
-  removeTeam: (id) =>
-    set((state) => {
-      const newCache = new Map(state.teamMembersCache);
-      newCache.delete(id);
-      return {
-        teams: state.teams.filter((team) => team.id !== id),
-        activeTeamId: state.activeTeamId === id ? null : state.activeTeamId,
-        teamMembersCache: newCache,
-      };
+      removeTeam: (id) =>
+        set((state) => {
+          const newCache = new Map(state.teamMembersCache);
+          newCache.delete(id);
+          return {
+            teams: state.teams.filter((team) => team.id !== id),
+            activeTeamId: state.activeTeamId === id ? null : state.activeTeamId,
+            teamMembersCache: newCache,
+          };
+        }),
+
+      setActiveTeam: (id) => set({ activeTeamId: id }),
+
+      getActiveTeam: () => {
+        const state = get();
+        return state.teams.find((team) => team.id === state.activeTeamId) || null;
+      },
+
+      setTeamMembers: (teamId, members) =>
+        set((state) => {
+          const newCache = new Map(state.teamMembersCache);
+          newCache.set(teamId, members);
+          return { teamMembersCache: newCache };
+        }),
+
+      getTeamMembers: (teamId) => {
+        const state = get();
+        return state.teamMembersCache.get(teamId) || [];
+      },
+
+      setLoading: (isLoading) => set({ isLoading }),
     }),
-
-  setActiveTeam: (id) => set({ activeTeamId: id }),
-
-  getActiveTeam: () => {
-    const state = get();
-    return state.teams.find((team) => team.id === state.activeTeamId) || null;
-  },
-
-  setTeamMembers: (teamId, members) =>
-    set((state) => {
-      const newCache = new Map(state.teamMembersCache);
-      newCache.set(teamId, members);
-      return { teamMembersCache: newCache };
-    }),
-
-  getTeamMembers: (teamId) => {
-    const state = get();
-    return state.teamMembersCache.get(teamId) || [];
-  },
-
-  setLoading: (isLoading) => set({ isLoading }),
-}));
+    { name: 'TeamStore' }
+  )
+);
