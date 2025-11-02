@@ -249,9 +249,10 @@ See [CODE_REVIEW_FIXES.md](./CODE_REVIEW_FIXES.md) for recent security improveme
 - [PHASE2_COMPLETE.md](./PHASE2_COMPLETE.md) - Database schema design and migrations
 - [PHASE3.5_AND_3.6_COMPLETE.md](./PHASE3.5_AND_3.6_COMPLETE.md) - Middleware and environment setup
 - [PHASE4.7_COMPLETE.md](./PHASE4.7_COMPLETE.md) - Issue management pages (list, board, detail) ✅
+- Phase 4.8 complete - see AGENTS.md Step 4.8 for IssueForm implementation details ✅
 
 ### Project Status
-- [MVP_STATUS.md](./MVP_STATUS.md) - **Comprehensive MVP progress report** (~45% complete)
+- [MVP_STATUS.md](./MVP_STATUS.md) - **Comprehensive MVP progress report** (~48% complete)
 
 ### Package Documentation
 - [packages/database/README.md](./packages/database/README.md) - Database setup and schema docs
@@ -365,10 +366,22 @@ See [PHASE2_COMPLETE.md](./PHASE2_COMPLETE.md) for database details.
     - `IssueStatusBadge.tsx` (58 lines) - Status badges with color coding
   - **Dependencies**: @dnd-kit/core, @dnd-kit/sortable, react-markdown, date-fns
   - **Total**: ~900 lines of production-ready code
-- [ ] Complete remaining UI components (Select, DropdownMenu, Popover, Checkbox, RadioGroup)
+- [x] **Phase 4.8**: Issue Form Component ✅ (100% Complete)
+  - **IssueForm Component (386 lines)**:
+    - Create/edit issue modal with React Hook Form + Zod validation
+    - All 10 issue properties: title, description, status, priority, assignee, project, cycle, due date, estimate, labels
+    - Keyboard shortcut: Cmd/Ctrl+Enter to submit
+    - Error handling, form reset, type-safe interfaces
+    - Create vs Edit modes with conditional rendering
+  - **Select Component (160 lines)**:
+    - Radix UI Select dropdown wrapper
+    - Accessible dropdown with proper keyboard navigation
+    - Custom Tailwind CSS styling matching design system
+  - **Dependencies**: react-hook-form@^7.54.2, @hookform/resolvers@^3.9.1, @radix-ui/react-select@^2.1.4
+  - **Total**: ~546 lines of production-ready code
+- [ ] Complete remaining UI components (DropdownMenu, Popover, Checkbox, RadioGroup)
 - [ ] Authentication pages (Phase 4.4)
 - [ ] Command Palette (Phase 4.6)
-- [ ] Issue Form component with Markdown editor (Phase 4.8)
 
 See sections 4.1, 4.2, and 4.3 in [AGENTS.md](./AGENTS.md) for completed features.
 
@@ -377,13 +390,13 @@ See sections 4.1, 4.2, and 4.3 in [AGENTS.md](./AGENTS.md) for completed feature
   - Proper body forwarding to Hono.js
   - All routes tested and working
 
-**Phase 4: Frontend Development** (75% Complete)
+**Phase 4: Frontend Development** (78% Complete)
 - [x] Design system and UI components (Phase 4.1-4.3)
 - [x] Main app navigation (Phase 4.5)
 - [x] Issue management pages (Phase 4.7) ✅
+- [x] Issue form component (Phase 4.8) ✅
 - [ ] Authentication pages (Phase 4.4)
 - [ ] Command palette (Phase 4.6)
-- [ ] Issue form with React Hook Form + Zod (Phase 4.8)
 - [ ] Project management (Phase 4.9)
 - [ ] Cycle management (Phase 4.10)
 - [ ] Comments system (Phase 4.11)

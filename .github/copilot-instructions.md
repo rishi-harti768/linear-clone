@@ -24,7 +24,7 @@
 
 This is a **Linear.app clone** built as a fullstack project management application with real-time collaboration. The project is in early development, bootstrapped from a Turborepo template with ambitious plans detailed in `AGENTS.md`.
 
-**Current State**: Production-ready monorepo with Next.js app (`web`), Hono.js backend (`api`), and complete database package (`database`) with Drizzle ORM. **Phase 1, 2, 3 (60%), & 4 (75%) complete** - project setup, database schema, core backend API with authentication/services/WebSocket/middleware, design system with 12 UI components, 5 Zustand stores, layouts with Sidebar+TopNav, and **Phase 4.7 Issue Management Pages (100% complete)** including list view (153 lines), Kanban board with drag-and-drop (260 lines), detail page (289 lines), and 5 reusable components (~440 lines total).
+**Current State**: Production-ready monorepo with Next.js app (`web`), Hono.js backend (`api`), and complete database package (`database`) with Drizzle ORM. **Phase 1, 2, 3 (60%), & 4 (78%) complete** - project setup, database schema, core backend API with authentication/services/WebSocket/middleware, design system with 12 UI components, 5 Zustand stores, layouts with Sidebar+TopNav, **Phase 4.7 Issue Management Pages (100% complete)** including list view (153 lines), Kanban board with drag-and-drop (260 lines), detail page (289 lines), 5 reusable components (~440 lines), and **Phase 4.8 Issue Form Component (100% complete)** with IssueForm modal (386 lines), Select dropdown (160 lines), React Hook Form + Zod validation, all 10 issue properties.
 
 **Production Readiness Goal**: Every component should be built with production scalability in mind - proper error boundaries, retry logic, circuit breakers, and observability hooks.
 
@@ -59,8 +59,17 @@ linear-clone/
   - IssueCard (89 lines), IssueRow (126 lines), IssueFilters (120 lines), IssuePriorityIcon (65 lines), IssueStatusBadge (58 lines)
   - Dependencies: @dnd-kit/core, @dnd-kit/sortable, react-markdown, date-fns
   - Total: ~900 lines of production-ready code
+- **Phase 4.8: Issue Form Component** ✅ (100% complete)
+  - IssueForm modal with React Hook Form + Zod validation (386 lines)
+  - Select dropdown component with Radix UI primitives (160 lines)
+  - All 10 issue properties: title, description, status, priority, assignee, project, cycle, due date, estimate, labels
+  - Keyboard shortcut: Cmd/Ctrl+Enter to submit
+  - Create vs Edit modes with conditional rendering
+  - Error handling, form reset, type-safe interfaces
+  - Dependencies: react-hook-form@^7.54.2, @hookform/resolvers@^3.9.1, @radix-ui/react-select@^2.1.4
+  - Total: ~546 lines of production-ready code
 
-**Current State**: Phase 4 at 75% completion. Next: Phase 4.4 Authentication Pages, Phase 4.6 Command Palette, Phase 4.8 IssueForm (with React Hook Form + Zod)
+**Current State**: Phase 4 at 78% completion. Next: Phase 4.4 Authentication Pages, Phase 4.6 Command Palette, Phase 4.9 Project Management
 
 ### Technology Stack
 

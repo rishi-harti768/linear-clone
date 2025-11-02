@@ -58,8 +58,13 @@ export const useTeamStore = create<TeamStore>()(
 
       // Actions
       setTeams: (teams) => set({ teams }),
-
-      addTeam: (team) =>
+      setActiveTeam: (team) => set({ activeTeam: team }),
+      setTeamMembers: (teamId, members) =>
+        set((state) => ({
+          teamMembers: { ...state.teamMembers, [teamId]: members },
+        })),
+      addTeam: (team) => set((state) => ({ teams: [...state.teams, team] })),
+      updateTeam: (id, updates) =>
         set((state) => ({
           teams: [...state.teams, team],
         })),
