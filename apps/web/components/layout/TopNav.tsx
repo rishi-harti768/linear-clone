@@ -37,7 +37,7 @@ export function TopNav() {
         </Button>
 
         {/* Create Issue */}
-        <Button variant="default" size="sm" className="gap-2">
+        <Button variant="primary" size="sm" className="gap-2">
           <Plus className="h-4 w-4" />
           New Issue
         </Button>
