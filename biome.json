@@ -7,7 +7,19 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["node_modules", ".next", "dist", "build", "coverage", ".turbo", "*.min.js"]
+    "ignore": [
+      "node_modules",
+      ".next",
+      "dist",
+      "build",
+      "coverage",
+      ".turbo",
+      "*.min.js",
+      "**/*.d.ts",
+      "**/*.d.ts.map",
+      "**/*.js",
+      "**/migrations/**"
+    ]
   },
   "linter": {
     "enabled": true,
