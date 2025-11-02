@@ -4,8 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: boolean;
   errorMessage?: string;
   showCharacterCount?: boolean;
@@ -71,9 +70,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             </span>
           </div>
         )}
-        {error && errorMessage && (
-          <p className="mt-1 text-xs text-destructive">{errorMessage}</p>
-        )}
+        {error && errorMessage && <p className="mt-1 text-xs text-destructive">{errorMessage}</p>}
       </div>
     );
   }
