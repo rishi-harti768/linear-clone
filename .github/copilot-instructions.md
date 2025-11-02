@@ -46,13 +46,14 @@ linear-clone/
 
 **Removed**: `docs` app (unnecessary for Linear clone), `eslint-config` package (replaced with Biome.js)
 
-**Phase 1, 2 & 3.1 Complete**:
+**Phase 1, 2, 3.1 & 4.1 Complete**:
 
 - Phase 1: Turborepo setup, Biome.js, Vitest, Next.js with Tailwind v4, Hono.js backend, database package
 - Phase 2: Database schema with 16 tables (users with passwordHash, sessions, workspaces, teams, projects, cycles, issues, labels, comments, attachments, activity logs, notifications), 17 performance indexes, transaction utilities, query builders
 - Phase 3.1: Authentication system with JWT tokens, bcrypt password hashing, session management, auth middleware, registration/login/logout/me endpoints, Zod validation, 17/17 tests passing
+- Phase 4.1: ✅ **Design System Complete** - Linear-inspired design tokens in Tailwind config, 15+ production-ready UI components (Button, Input, Select, Dialog, Popover, DropdownMenu, Tooltip, Badge, Avatar, Checkbox, RadioGroup, Textarea, Command, ContextMenu, Separator, Label) with Radix UI primitives, full accessibility support, smooth animations (150-300ms), dark/light theme support
 
-**Current State**: Fresh Next.js 16 + Tailwind CSS v4 app with minimal scaffolding, ready for Linear clone UI development
+**Current State**: Production-ready design system with comprehensive UI component library, ready for feature development (Phase 4.2+)
 
 ### Technology Stack
 
@@ -73,10 +74,17 @@ linear-clone/
 - Validation: Zod 3.23.8
 - Testing: Vitest 2.1.4 (comprehensive test coverage required)
 
+**Implemented (Phase 4.1)**:
+
+- UI: ✅ Radix UI primitives installed (@radix-ui/react-dropdown-menu, @radix-ui/react-popover, @radix-ui/react-tooltip, @radix-ui/react-avatar, @radix-ui/react-checkbox, @radix-ui/react-radio-group, @radix-ui/react-select, @radix-ui/react-context-menu, @radix-ui/react-separator, @radix-ui/react-label)
+- UI: ✅ Command palette base (cmdk) installed
+- UI: ✅ 15+ production-ready components in `apps/web/components/ui/`
+- Design: ✅ Linear-inspired design tokens (colors, typography, spacing, animations)
+- Theme: ✅ Dark/light mode support with CSS variables
+
 **Planned** (per `AGENTS.md`):
 
 - Backend: WebSockets for real-time features
-- UI: Radix UI primitives (to be installed)
 - State: Zustand (to be installed)
 - Forms: React Hook Form + Zod (to be installed)
 
