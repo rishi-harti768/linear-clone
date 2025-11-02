@@ -5,6 +5,7 @@
 
 export * from './auth-store';
 export * from './issue-store';
+export * from './project-store';
 export * from './team-store';
 export * from './ui-store';
 export * from './workspace-store';
