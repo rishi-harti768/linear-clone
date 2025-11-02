@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 import styles from './styles.module.css';
 
-const FooterSection: FC<FooterSection> = ({ items, title }) => {
+const FooterSectionComponent: FC<FooterSection> = ({ items, title }) => {
   return (
     <div className={styles.footer__section}>
       <h3 className={styles.footer__section__title}> {title} </h3>
@@ -18,4 +18,4 @@ const FooterSection: FC<FooterSection> = ({ items, title }) => {
   );
 };
 
-export default FooterSection;
+export default FooterSectionComponent;

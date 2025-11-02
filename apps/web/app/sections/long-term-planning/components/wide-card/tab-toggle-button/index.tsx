@@ -12,6 +12,7 @@ type Props = {
 const TabToggleButton: FC<Props> = ({ isActive = false, title, handleClick }) => {
   return (
     <button
+      type="button"
       onClick={handleClick}
       className={cn(styles.toggle__button, isActive && styles.toggle__button__active)}
     >

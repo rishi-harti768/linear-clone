@@ -8,7 +8,7 @@ export type FeatureLookupProps = {
   icon: ReactNode;
 };
 
-const BentoGridFeatureLookUpCard: FC<FeatureLookupProps> = ({ id, icon, description, title }) => {
+const BentoGridFeatureLookUpCard: FC<FeatureLookupProps> = ({ icon, description, title }) => {
   return (
     <div className={styles.bento__grid__feature__lookup__card}>
       <div className={styles.title__container}>
