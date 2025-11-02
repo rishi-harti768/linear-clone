@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .bento__card__right {
   @apply ps-0 md:ps-[48px] [padding-block:40px] md:[padding-block:56px] flex flex-col gap-8;
 }

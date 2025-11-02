@@ -2,6 +2,7 @@ import { Plus } from 'lucide-react';
 import Image from 'next/image';
 import type { FC } from 'react';
 import styles from './styles.module.css';
+
 const CarouselCard: FC = () => {
   return (
     <div className={styles.card}>

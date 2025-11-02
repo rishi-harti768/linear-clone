@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .tab__body {
   @apply col-start-1 col-end-5 md:col-start-5 md:col-end-13;
 }

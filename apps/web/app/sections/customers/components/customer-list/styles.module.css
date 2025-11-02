@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .customer__grid {
   @apply relative grid grid-cols-1 place-items-center cursor-pointer;
 }

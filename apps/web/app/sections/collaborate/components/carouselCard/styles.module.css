@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .card {
   @apply relative isolate overflow-hidden flex flex-col justify-end px-6 py-4 md:p-8 w-[336px] aspect-[336/469] rounded-[30px] bg-[var(--color-bg-primary)] hover:brightness-[170%];
   max-width: calc(100vw - var(--page-padding-left) - var(--page-padding-right) - 32px);

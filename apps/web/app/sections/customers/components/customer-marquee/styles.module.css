@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .marquee {
   @apply relative w-full left-1/2 right-1/2 ml-[-50vw] mr-[-50vw];
   --Marquee-gap: 24px;

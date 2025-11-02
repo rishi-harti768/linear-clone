@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .bento__grid__feature__lookup__card {
   @apply flex flex-col gap-2;
 }
