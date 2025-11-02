@@ -4,17 +4,24 @@ A high-fidelity fullstack clone of Linear.app built with modern technologies foc
 
 ## 🚀 Technology Stack
 
+### Core Technologies
 - **Package Manager**: npm 11.6.2
 - **Build System**: Turborepo 2.3.0
 - **Frontend**: Next.js 16.0.1 with React 19.2.0 (App Router)
 - **Backend**: Hono.js 4.6.11
-- **Database**: PostgreSQL with Drizzle ORM 0.36.4
-- **Styling**: **Tailwind CSS 4.1.16** (v4 - CSS-first architecture)
+- **Database**: PostgreSQL with Drizzle ORM 0.44.7
+- **Styling**: Tailwind CSS 4.1.16 (v4 - CSS-first architecture)
 - **Code Quality**: Biome.js 1.9.4 (root) + 2.2.0 (web)
-- **Testing**: Vitest 2.1.4
+- **Testing**: Vitest 2.1.9
 - **TypeScript**: 5.6.3
-- **Auth**: ✅ **Better Auth (JWT + Bcrypt)** - Implemented
-- **Validation**: Zod 3.23.8
+
+### Backend Stack ✅ Implemented
+- **Auth**: JWT tokens + Bcrypt password hashing
+- **Validation**: Zod 3.23.8 (schema validation)
+- **Real-time**: WebSockets (ws 8.18.0)
+- **Middleware**: CORS, validation, rate limiting, auth, error handling
+
+### Frontend Stack (Planned)
 - **UI Components**: Radix UI (to be installed)
 - **State Management**: Zustand (to be installed)
 - **Forms**: React Hook Form + Zod (to be installed)
@@ -210,13 +217,18 @@ npm run db:studio
 
 See [CODE_REVIEW_FIXES.md](./CODE_REVIEW_FIXES.md) for recent security improvements.
 
-## �📚 Documentation
+## 📚 Documentation
 
+### Main Documentation
 - [AGENTS.md](./AGENTS.md) - Comprehensive implementation guide and feature requirements
 - [.github/copilot-instructions.md](./.github/copilot-instructions.md) - Development guidelines and best practices
-- [CODE_REVIEW_FIXES.md](./CODE_REVIEW_FIXES.md) - Security improvements and code review responses
-- [TESTING.md](./TESTING.md) - Testing guide and manual API testing instructions
-- [apps/api/README.md](./apps/api/README.md) - Backend API documentation
+
+### Phase Completion Reports
+- [PHASE1_COMPLETE.md](./PHASE1_COMPLETE.md) - Project setup and configuration
+- [PHASE2_COMPLETE.md](./PHASE2_COMPLETE.md) - Database schema design and migrations
+- [PHASE3.5_AND_3.6_COMPLETE.md](./PHASE3.5_AND_3.6_COMPLETE.md) - Middleware and environment setup
+
+### Package Documentation
 - [packages/database/README.md](./packages/database/README.md) - Database setup and schema docs
 
 ## 🎯 Current Status
@@ -228,7 +240,7 @@ See [CODE_REVIEW_FIXES.md](./CODE_REVIEW_FIXES.md) for recent security improveme
 - [x] Project initialization with Turborepo
 - [x] Biome.js setup for linting and formatting
 - [x] Vitest setup for comprehensive testing
-- [x] Next.js app with Tailwind CSS and Radix UI
+- [x] Next.js app with Tailwind CSS v4 and Radix UI
 - [x] Hono.js backend with clean architecture
 - [x] Database package with Drizzle ORM
 - [x] Turborepo pipeline configuration
@@ -243,19 +255,56 @@ See [CODE_REVIEW_FIXES.md](./CODE_REVIEW_FIXES.md) for recent security improveme
 - [x] Connection pooling configuration
 - [x] Comprehensive documentation
 
-**Phase 3.1: Authentication System** ✅
+**Phase 3: Backend API Development** ✅ (60% Complete)
 
-- [x] JWT token authentication with 7-day expiration
-- [x] Bcrypt password hashing (cost factor 12)
-- [x] Session management with database-backed tokens
-- [x] Auth middleware for protected routes
-- [x] User registration endpoint
-- [x] User login endpoint
-- [x] User logout endpoint
-- [x] Get current user endpoint
-- [x] Zod validation schemas
-- [x] Comprehensive unit tests (17/17 passing)
-- [x] Clean architecture (routes → services → database)
+- [x] **Phase 3.1: Authentication System** ✅
+  - JWT token authentication with 7-day expiration
+  - Bcrypt password hashing (cost factor 12)
+  - Session management with database-backed tokens
+  - Auth middleware for protected routes
+  - User registration, login, logout, get-me endpoints
+  - 17/17 tests passing
+
+- [x] **Phase 3.2: API Route Handlers** ✅
+  - Workspace routes (CRUD operations, member management)
+  - Team routes (CRUD operations, member management)
+  - Issue routes (CRUD operations, comments, activity)
+  - Project routes (CRUD operations, progress tracking)
+  - Cycle routes (CRUD operations, issue management)
+  - Label routes (CRUD operations)
+  - Comment routes (update, delete, reactions)
+  - Attachment routes (upload, delete)
+  - Notification routes (list, mark read, archive)
+  - Search routes (global search, issue search)
+  - Activity routes (user feed, workspace feed)
+
+- [x] **Phase 3.3: Business Logic Services** ✅
+  - Issue service (create, update, filter, reorder, activity tracking)
+  - Project service (progress calculation, statistics)
+  - Cycle service (active cycles, progress tracking)
+  - Notification service (creation, mentions, assignments)
+  - Activity service (logging, feed generation)
+
+- [x] **Phase 3.4: WebSocket Real-time Updates** ✅
+  - WebSocket server integration with Hono
+  - Room-based pub/sub (workspace, team, issue, project, cycle, user)
+  - Event broadcasting (issue updates, comments, status changes)
+  - Client connection management
+  - Rate limiting for WebSocket messages
+  - Heartbeat/ping mechanism
+  - Type-safe event payloads
+
+- [x] **Phase 3.5: Middleware Layer** ✅
+  - CORS middleware (environment-aware, multiple strategies)
+  - Validation middleware (type-safe Zod validation)
+  - Rate limiting middleware (in-memory, multiple strategies)
+  - Auth middleware (JWT verification)
+  - Error handler (global error handling)
+
+- [x] **Phase 3.6: Environment Configuration** ✅
+  - Comprehensive .env.example with documentation
+  - Required variables (DATABASE_URL, JWT_SECRET, etc.)
+  - Optional configurations (rate limiting, email, Redis, logging, feature flags)
 
 See [PHASE2_COMPLETE.md](./PHASE2_COMPLETE.md) for database details.
 
@@ -284,25 +333,26 @@ See sections 4.1, 4.2, and 4.3 in [AGENTS.md](./AGENTS.md) for completed feature
 
 ### 🔄 In Progress
 
-<<<<<<< HEAD
+
 - [ ] Backend API development (Phase 3)
 - [ ] Frontend development - Phase 4.3 onwards
 - [ ] Authentication with Better Auth
-=======
 - [ ] Workspace & Team management routes (Phase 3.2)
 - [ ] Issue tracking routes (Phase 3.3)
 - [ ] Frontend development (Phase 4)
->>>>>>> 5bd2ee8137d2990974c1eec707bcd54a727f4e4a
 
 ### 📋 Planned
 
-- [ ] Issue tracking features
-- [ ] Project management
-- [ ] Cycles/sprints
-- [ ] Real-time collaboration with WebSockets
-- [ ] Command palette
-- [ ] Search functionality
-- [ ] Notifications
+- [ ] **Phase 4**: Frontend development (Next.js)
+  - Design system and UI components
+  - Authentication pages
+  - Issue management views (list, board, detail)
+  - Project and cycle management
+  - Command palette
+  - Real-time synchronization
+- [ ] **Phase 5**: Comprehensive testing
+- [ ] **Phase 6**: Performance optimization
+- [ ] **Phase 7**: Documentation
 
 ## 🤝 Contributing
 

@@ -38,10 +38,10 @@ const CommentPopUp: FC = () => {
           <span className={styles.username}>julian</span>
           <span className={styles.time}> just now</span>
           <span className={styles.controls}>
-            <button className={styles.button}>
+            <button type="button" className={styles.button}>
               <More />
             </button>
-            <button className={styles.button}>
+            <button type="button" className={styles.button}>
               <Tick />
             </button>
           </span>
