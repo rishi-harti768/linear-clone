@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 const Header: FC = () => {
   return (
     <div className={styles.header}>
-      <div className={styles.header__blur__mask}></div>
-      <div className={styles.header__overlay}></div>
+      <div className={styles.header__blur__mask} />
+      <div className={styles.header__overlay} />
       <header className={styles.header__wrapper}>
         <nav className={styles.header__root}>
           <div className="relative">

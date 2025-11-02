@@ -12,7 +12,7 @@ const TextToIssueCommands: FC = () => {
       <div className={styles.heading}>Convert text to issues</div>
 
       <div className={styles.description}>Seamlessly move between ideation and execution.</div>
-      <div className="mb-6"></div>
+      <div className="mb-6" />
       <Placeholder />
     </div>
   );

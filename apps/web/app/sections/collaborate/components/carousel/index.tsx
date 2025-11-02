@@ -20,10 +20,10 @@ const Carousel: FC = () => {
         </div>
 
         <div className={styles.card__controls__container}>
-          <button className={styles.icon__button}>
+          <button type="button" className={styles.icon__button}>
             <ChevronLeft />
           </button>
-          <button className={styles.icon__button}>
+          <button type="button" className={styles.icon__button}>
             <ChevronRight />
           </button>
         </div>

@@ -17,7 +17,7 @@ const CarouselCard: FC = () => {
           <p> Automate pull requests and commit workflows </p>
         </div>
 
-        <button className={styles.icon__button}>
+        <button type="button" className={styles.icon__button}>
           <Plus />
         </button>
       </div>
