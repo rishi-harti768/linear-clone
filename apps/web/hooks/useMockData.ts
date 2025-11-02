@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useWorkspaceStore } from '@/stores/workspaceStore';
 import { useTeamStore } from '@/stores/teamStore';
+import { useWorkspaceStore } from '@/stores/workspaceStore';
 
 /**
  * Mock data initializer for development

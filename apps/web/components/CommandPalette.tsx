@@ -1,9 +1,18 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
 import {
-  Command,
+  FileText,
+  FolderKanban,
+  Inbox,
+  ListTodo,
+  Plus,
+  Repeat,
+  Search,
+  Settings,
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
+import {
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -12,20 +21,8 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import {
-  FileText,
-  FolderKanban,
-  Repeat,
-  User,
-  Plus,
-  Settings,
-  Inbox,
-  ListTodo,
-  Search,
-} from 'lucide-react';
-import { useUIStore } from '@/stores/uiStore';
-import { useWorkspaceStore } from '@/stores/workspaceStore';
 import { useTeamStore } from '@/stores/teamStore';
+import { useUIStore } from '@/stores/uiStore';
 
 interface CommandAction {
   id: string;
@@ -149,7 +146,7 @@ export function CommandPalette() {
         shortcut: 'g c',
       }
     );
-  }  // Search actions
+  } // Search actions
   const searchActions: CommandAction[] = [
     {
       id: 'search-issues',
@@ -176,9 +173,7 @@ export function CommandPalette() {
   // Filter actions based on search
   const filterActions = (items: CommandAction[]) => {
     if (!search) return items;
-    return items.filter((item) =>
-      item.label.toLowerCase().includes(search.toLowerCase())
-    );
+    return items.filter((item) => item.label.toLowerCase().includes(search.toLowerCase()));
   };
 
   const filteredActions = filterActions(actions);
@@ -216,9 +211,7 @@ export function CommandPalette() {
                     <span>{action.label}</span>
                   </div>
                   {action.shortcut && (
-                    <span className="text-xs text-muted-foreground">
-                      {action.shortcut}
-                    </span>
+                    <span className="text-xs text-muted-foreground">{action.shortcut}</span>
                   )}
                 </CommandItem>
               ))}
@@ -242,9 +235,7 @@ export function CommandPalette() {
                     <span>{action.label}</span>
                   </div>
                   {action.shortcut && (
-                    <span className="text-xs text-muted-foreground">
-                      {action.shortcut}
-                    </span>
+                    <span className="text-xs text-muted-foreground">{action.shortcut}</span>
                   )}
                 </CommandItem>
               ))}

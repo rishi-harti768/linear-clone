@@ -1,5 +1,6 @@
 'use client';
 
+import { Bell, Menu, Plus, Search } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +12,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuthStore } from '@/stores/authStore';
 import { useUIStore } from '@/stores/uiStore';
-import { Bell, Menu, Plus, Search } from 'lucide-react';
 
 export function TopNav() {
   const { user } = useAuthStore();

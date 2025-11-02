@@ -1,24 +1,23 @@
 'use client';
 
-import { useState } from 'react';
-import { useIssueStore } from '@/stores/issueStore';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
-  Search,
-  Plus,
+  AlertCircle,
+  ArrowUp,
+  CheckCircle2,
+  Circle,
   Filter,
   LayoutGrid,
   List,
-  Calendar,
-  CheckCircle2,
-  Circle,
-  ArrowUp,
   Minus,
-  AlertCircle,
+  Plus,
+  Search,
 } from 'lucide-react';
+import { useState } from 'react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useIssueStore } from '@/stores/issueStore';
 
 type ViewMode = 'list' | 'board';
 type FilterType = 'all' | 'active' | 'completed';
@@ -31,40 +30,102 @@ export default function IssuesPage() {
 
   // Mock issues data (replace with real data from store)
   const mockIssues = [
-    { id: '1', identifier: 'LIN-234', title: 'Add dark mode support', status: 'in_progress' as const, priority: 'high' as const, assigneeId: '1', assigneeName: 'Sarah Chen', assigneeAvatar: 'SC', labelsList: ['Feature', 'UI'] },
-    { id: '2', identifier: 'LIN-233', title: 'Fix login authentication bug', status: 'done' as const, priority: 'urgent' as const, assigneeId: '2', assigneeName: 'Alex Kumar', assigneeAvatar: 'AK', labelsList: ['Bug'] },
-    { id: '3', identifier: 'LIN-232', title: 'Update API documentation', status: 'todo' as const, priority: 'medium' as const, assigneeId: null, assigneeName: null, assigneeAvatar: null, labelsList: ['Documentation'] },
-    { id: '4', identifier: 'LIN-231', title: 'Optimize database queries', status: 'in_progress' as const, priority: 'high' as const, assigneeId: '3', assigneeName: 'Maya Patel', assigneeAvatar: 'MP', labelsList: ['Performance'] },
-    { id: '5', identifier: 'LIN-230', title: 'Design new onboarding flow', status: 'backlog' as const, priority: 'low' as const, assigneeId: '4', assigneeName: 'Jordan Lee', assigneeAvatar: 'JL', labelsList: ['Design', 'UX'] },
+    {
+      id: '1',
+      identifier: 'LIN-234',
+      title: 'Add dark mode support',
+      status: 'in_progress' as const,
+      priority: 'high' as const,
+      assigneeId: '1',
+      assigneeName: 'Sarah Chen',
+      assigneeAvatar: 'SC',
+      labelsList: ['Feature', 'UI'],
+    },
+    {
+      id: '2',
+      identifier: 'LIN-233',
+      title: 'Fix login authentication bug',
+      status: 'done' as const,
+      priority: 'urgent' as const,
+      assigneeId: '2',
+      assigneeName: 'Alex Kumar',
+      assigneeAvatar: 'AK',
+      labelsList: ['Bug'],
+    },
+    {
+      id: '3',
+      identifier: 'LIN-232',
+      title: 'Update API documentation',
+      status: 'todo' as const,
+      priority: 'medium' as const,
+      assigneeId: null,
+      assigneeName: null,
+      assigneeAvatar: null,
+      labelsList: ['Documentation'],
+    },
+    {
+      id: '4',
+      identifier: 'LIN-231',
+      title: 'Optimize database queries',
+      status: 'in_progress' as const,
+      priority: 'high' as const,
+      assigneeId: '3',
+      assigneeName: 'Maya Patel',
+      assigneeAvatar: 'MP',
+      labelsList: ['Performance'],
+    },
+    {
+      id: '5',
+      identifier: 'LIN-230',
+      title: 'Design new onboarding flow',
+      status: 'backlog' as const,
+      priority: 'low' as const,
+      assigneeId: '4',
+      assigneeName: 'Jordan Lee',
+      assigneeAvatar: 'JL',
+      labelsList: ['Design', 'UX'],
+    },
   ];
 
-  const allIssues = Array.from(issues.values()).length > 0 ? Array.from(issues.values()) : mockIssues;
+  const allIssues =
+    Array.from(issues.values()).length > 0 ? Array.from(issues.values()) : mockIssues;
 
   const filteredIssues = allIssues.filter((issue) => {
-    const matchesFilter = 
-      filter === 'all' ? true :
-      filter === 'active' ? issue.status !== 'done' && issue.status !== 'cancelled' :
-      issue.status === 'done';
-    
-    const matchesSearch = searchQuery === '' || 
+    const matchesFilter =
+      filter === 'all'
+        ? true
+        : filter === 'active'
+          ? issue.status !== 'done' && issue.status !== 'cancelled'
+          : issue.status === 'done';
+
+    const matchesSearch =
+      searchQuery === '' ||
       issue.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       issue.identifier.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     return matchesFilter && matchesSearch;
   });
 
   const getPriorityIcon = (priority: string) => {
     switch (priority) {
-      case 'urgent': return <AlertCircle className="h-4 w-4 text-red-500" />;
-      case 'high': return <ArrowUp className="h-4 w-4 text-orange-500" />;
-      case 'medium': return <Minus className="h-4 w-4 text-yellow-500" />;
-      case 'low': return <ArrowUp className="h-4 w-4 text-blue-500 rotate-180" />;
-      default: return <Circle className="h-4 w-4 text-muted-foreground" />;
+      case 'urgent':
+        return <AlertCircle className="h-4 w-4 text-red-500" />;
+      case 'high':
+        return <ArrowUp className="h-4 w-4 text-orange-500" />;
+      case 'medium':
+        return <Minus className="h-4 w-4 text-yellow-500" />;
+      case 'low':
+        return <ArrowUp className="h-4 w-4 text-blue-500 rotate-180" />;
+      default:
+        return <Circle className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, any> = {
+    const variants: Record<
+      string,
+      'backlog' | 'todo' | 'inProgress' | 'done' | 'cancelled' | 'default'
+    > = {
       backlog: 'backlog',
       todo: 'todo',
       in_progress: 'inProgress',
@@ -119,31 +180,28 @@ export default function IssuesPage() {
         {/* Filter Buttons */}
         <div className="flex items-center gap-2 bg-muted/50 p-1 rounded-lg">
           <button
+            type="button"
             onClick={() => setFilter('all')}
             className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-              filter === 'all' 
-                ? 'bg-background shadow-sm' 
-                : 'hover:bg-background/50'
+              filter === 'all' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
             }`}
           >
             All
           </button>
           <button
+            type="button"
             onClick={() => setFilter('active')}
             className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-              filter === 'active' 
-                ? 'bg-background shadow-sm' 
-                : 'hover:bg-background/50'
+              filter === 'active' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
             }`}
           >
             Active
           </button>
           <button
+            type="button"
             onClick={() => setFilter('completed')}
             className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-              filter === 'completed' 
-                ? 'bg-background shadow-sm' 
-                : 'hover:bg-background/50'
+              filter === 'completed' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
             }`}
           >
             Completed
@@ -153,22 +211,20 @@ export default function IssuesPage() {
         {/* View Mode Toggle */}
         <div className="flex items-center gap-1 bg-muted/50 p-1 rounded-lg">
           <button
+            type="button"
             onClick={() => setViewMode('list')}
             className={`p-2 rounded-md transition-all ${
-              viewMode === 'list' 
-                ? 'bg-background shadow-sm' 
-                : 'hover:bg-background/50'
+              viewMode === 'list' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
             }`}
             title="List view"
           >
             <List className="h-4 w-4" />
           </button>
           <button
+            type="button"
             onClick={() => setViewMode('board')}
             className={`p-2 rounded-md transition-all ${
-              viewMode === 'board' 
-                ? 'bg-background shadow-sm' 
-                : 'hover:bg-background/50'
+              viewMode === 'board' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
             }`}
             title="Board view"
           >
@@ -194,9 +250,7 @@ export default function IssuesPage() {
               >
                 <div className="flex items-center gap-4">
                   {/* Priority Icon */}
-                  <div className="flex-shrink-0">
-                    {getPriorityIcon(issue.priority)}
-                  </div>
+                  <div className="flex-shrink-0">{getPriorityIcon(issue.priority)}</div>
 
                   {/* Issue Details */}
                   <div className="flex-1 min-w-0 space-y-1">
@@ -212,11 +266,12 @@ export default function IssuesPage() {
                       <Badge variant={getStatusBadge(issue.status)} className="text-xs">
                         {getStatusLabel(issue.status)}
                       </Badge>
-                      {'labelsList' in issue && issue.labelsList?.map((label: string) => (
-                        <Badge key={label} variant="outline" className="text-xs">
-                          {label}
-                        </Badge>
-                      ))}
+                      {'labelsList' in issue &&
+                        issue.labelsList?.map((label: string) => (
+                          <Badge key={label} variant="outline" className="text-xs">
+                            {label}
+                          </Badge>
+                        ))}
                     </div>
                   </div>
 
@@ -246,11 +301,11 @@ export default function IssuesPage() {
           <div className="space-y-2">
             <h3 className="text-xl font-semibold">No issues found</h3>
             <p className="text-muted-foreground max-w-sm mx-auto">
-              {searchQuery 
+              {searchQuery
                 ? `No issues match "${searchQuery}". Try a different search term.`
                 : filter === 'completed'
                   ? "You haven't completed any issues yet. Keep up the good work!"
-                  : "Create your first issue to get started"}
+                  : 'Create your first issue to get started'}
             </p>
           </div>
           {!searchQuery && (

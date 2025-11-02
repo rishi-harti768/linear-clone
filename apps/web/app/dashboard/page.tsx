@@ -1,23 +1,23 @@
 'use client';
 
-import Link from 'next/link';
-import { useAuthStore } from '@/stores/authStore';
-import { useIssueStore } from '@/stores/issueStore';
-import { 
-  CheckCircle2, 
-  Circle, 
-  Clock, 
-  TrendingUp, 
+import {
+  AlertCircle,
+  ArrowRight,
+  Calendar,
+  CheckCircle2,
+  Circle,
+  Clock,
   Plus,
   Search,
+  TrendingUp,
   Users,
-  ArrowRight,
-  AlertCircle,
-  Calendar
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { useAuthStore } from '@/stores/authStore';
+import { useIssueStore } from '@/stores/issueStore';
 
 export default function DashboardPage() {
   const { user } = useAuthStore();
@@ -26,26 +26,63 @@ export default function DashboardPage() {
   // Mock data for stats (replace with real API data)
   const stats = {
     total: Array.from(issues.values()).length || 12,
-    inProgress: Array.from(issues.values()).filter(i => i.status === 'in_progress').length || 5,
-    completed: Array.from(issues.values()).filter(i => i.status === 'done').length || 7,
+    inProgress: Array.from(issues.values()).filter((i) => i.status === 'in_progress').length || 5,
+    completed: Array.from(issues.values()).filter((i) => i.status === 'done').length || 7,
     overdue: 2,
   };
 
   // Mock recent activity
   const recentActivity = [
-    { id: 1, type: 'issue_created', user: 'Sarah Chen', action: 'created', target: 'LIN-234: Add dark mode support', time: '5m ago', avatar: 'SC' },
-    { id: 2, type: 'issue_completed', user: 'Alex Kumar', action: 'completed', target: 'LIN-231: Fix login bug', time: '1h ago', avatar: 'AK' },
-    { id: 3, type: 'comment', user: 'Maya Patel', action: 'commented on', target: 'LIN-229: Update documentation', time: '2h ago', avatar: 'MP' },
-    { id: 4, type: 'issue_assigned', user: 'Jordan Lee', action: 'assigned you to', target: 'LIN-235: Performance optimization', time: '3h ago', avatar: 'JL' },
+    {
+      id: 1,
+      type: 'issue_created',
+      user: 'Sarah Chen',
+      action: 'created',
+      target: 'LIN-234: Add dark mode support',
+      time: '5m ago',
+      avatar: 'SC',
+    },
+    {
+      id: 2,
+      type: 'issue_completed',
+      user: 'Alex Kumar',
+      action: 'completed',
+      target: 'LIN-231: Fix login bug',
+      time: '1h ago',
+      avatar: 'AK',
+    },
+    {
+      id: 3,
+      type: 'comment',
+      user: 'Maya Patel',
+      action: 'commented on',
+      target: 'LIN-229: Update documentation',
+      time: '2h ago',
+      avatar: 'MP',
+    },
+    {
+      id: 4,
+      type: 'issue_assigned',
+      user: 'Jordan Lee',
+      action: 'assigned you to',
+      target: 'LIN-235: Performance optimization',
+      time: '3h ago',
+      avatar: 'JL',
+    },
   ];
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'issue_created': return <Plus className="h-4 w-4 text-blue-500" />;
-      case 'issue_completed': return <CheckCircle2 className="h-4 w-4 text-green-500" />;
-      case 'comment': return <AlertCircle className="h-4 w-4 text-purple-500" />;
-      case 'issue_assigned': return <Users className="h-4 w-4 text-orange-500" />;
-      default: return <Circle className="h-4 w-4 text-muted-foreground" />;
+      case 'issue_created':
+        return <Plus className="h-4 w-4 text-blue-500" />;
+      case 'issue_completed':
+        return <CheckCircle2 className="h-4 w-4 text-green-500" />;
+      case 'comment':
+        return <AlertCircle className="h-4 w-4 text-purple-500" />;
+      case 'issue_assigned':
+        return <Users className="h-4 w-4 text-orange-500" />;
+      default:
+        return <Circle className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
@@ -69,7 +106,9 @@ export default function DashboardPage() {
             <div className="p-3 bg-blue-500/10 rounded-lg group-hover:bg-blue-500/20 transition-colors">
               <TrendingUp className="h-6 w-6 text-blue-500" />
             </div>
-            <Badge variant="secondary" className="text-xs">All time</Badge>
+            <Badge variant="secondary" className="text-xs">
+              All time
+            </Badge>
           </div>
           <div className="space-y-1">
             <p className="text-3xl font-bold">{stats.total}</p>
@@ -83,7 +122,9 @@ export default function DashboardPage() {
             <div className="p-3 bg-orange-500/10 rounded-lg group-hover:bg-orange-500/20 transition-colors">
               <Clock className="h-6 w-6 text-orange-500" />
             </div>
-            <Badge variant="inProgress" className="text-xs">Active</Badge>
+            <Badge variant="inProgress" className="text-xs">
+              Active
+            </Badge>
           </div>
           <div className="space-y-1">
             <p className="text-3xl font-bold">{stats.inProgress}</p>
@@ -97,7 +138,9 @@ export default function DashboardPage() {
             <div className="p-3 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 transition-colors">
               <CheckCircle2 className="h-6 w-6 text-green-500" />
             </div>
-            <Badge variant="done" className="text-xs">Done</Badge>
+            <Badge variant="done" className="text-xs">
+              Done
+            </Badge>
           </div>
           <div className="space-y-1">
             <p className="text-3xl font-bold">{stats.completed}</p>
@@ -111,7 +154,9 @@ export default function DashboardPage() {
             <div className="p-3 bg-red-500/10 rounded-lg group-hover:bg-red-500/20 transition-colors">
               <AlertCircle className="h-6 w-6 text-red-500" />
             </div>
-            <Badge variant="error" className="text-xs">Urgent</Badge>
+            <Badge variant="error" className="text-xs">
+              Urgent
+            </Badge>
           </div>
           <div className="space-y-1">
             <p className="text-3xl font-bold">{stats.overdue}</p>
@@ -183,14 +228,17 @@ export default function DashboardPage() {
               <Clock className="h-5 w-5" />
               Recent Activity
             </h2>
-            <Link href="/issues/me" className="text-sm text-primary hover:text-primary/80 transition-colors font-medium">
+            <Link
+              href="/issues/me"
+              className="text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+            >
               View all →
             </Link>
           </div>
           <div className="bg-card border border-border rounded-xl divide-y divide-border">
             {recentActivity.map((activity) => (
-              <div 
-                key={activity.id} 
+              <div
+                key={activity.id}
                 className="p-4 hover:bg-muted/50 transition-colors group cursor-pointer"
               >
                 <div className="flex items-start gap-4">
@@ -204,10 +252,8 @@ export default function DashboardPage() {
                       <div className="mt-1">{getActivityIcon(activity.type)}</div>
                       <div className="flex-1">
                         <p className="text-sm">
-                          <span className="font-medium">{activity.user}</span>
-                          {' '}
-                          <span className="text-muted-foreground">{activity.action}</span>
-                          {' '}
+                          <span className="font-medium">{activity.user}</span>{' '}
+                          <span className="text-muted-foreground">{activity.action}</span>{' '}
                           <span className="font-medium group-hover:text-primary transition-colors">
                             {activity.target}
                           </span>

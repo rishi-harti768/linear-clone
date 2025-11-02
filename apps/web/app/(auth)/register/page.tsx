@@ -1,12 +1,12 @@
 'use client';
 
+import { AlertCircle, CheckCircle2, Eye, EyeOff, Lock, Mail, User } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuthStore } from '@/stores/authStore';
-import { Eye, EyeOff, Mail, Lock, User, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -95,10 +95,11 @@ export default function RegisterPage() {
     }
   };
 
-  const handleInputChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-    if (error) setError(null);
-  };
+  const handleInputChange =
+    (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+      if (error) setError(null);
+    };
 
   const handleBlur = (field: keyof typeof formData) => () => {
     setTouched((prev) => ({ ...prev, [field]: true }));
@@ -113,9 +114,7 @@ export default function RegisterPage() {
         <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
           Create your account
         </h1>
-        <p className="text-muted-foreground">
-          Get started with Linear Clone today — it's free
-        </p>
+        <p className="text-muted-foreground">Get started with Linear Clone today — it's free</p>
       </div>
 
       {/* Error Alert */}
@@ -229,12 +228,17 @@ export default function RegisterPage() {
                     style={{ width: strength.width }}
                   />
                 </div>
-                <span className={`text-xs font-medium ${
-                  strength.label === 'Weak' ? 'text-red-500' :
-                  strength.label === 'Fair' ? 'text-orange-500' :
-                  strength.label === 'Good' ? 'text-yellow-500' :
-                  'text-green-500'
-                }`}>
+                <span
+                  className={`text-xs font-medium ${
+                    strength.label === 'Weak'
+                      ? 'text-red-500'
+                      : strength.label === 'Fair'
+                        ? 'text-orange-500'
+                        : strength.label === 'Good'
+                          ? 'text-yellow-500'
+                          : 'text-green-500'
+                  }`}
+                >
                   {strength.label}
                 </span>
               </div>
@@ -326,11 +330,17 @@ export default function RegisterPage() {
       {/* Terms */}
       <p className="text-xs text-center text-muted-foreground">
         By creating an account, you agree to our{' '}
-        <Link href="/terms" className="text-primary hover:text-primary/80 transition-colors font-medium">
+        <Link
+          href="/terms"
+          className="text-primary hover:text-primary/80 transition-colors font-medium"
+        >
           Terms of Service
         </Link>{' '}
         and{' '}
-        <Link href="/privacy" className="text-primary hover:text-primary/80 transition-colors font-medium">
+        <Link
+          href="/privacy"
+          className="text-primary hover:text-primary/80 transition-colors font-medium"
+        >
           Privacy Policy
         </Link>
       </p>

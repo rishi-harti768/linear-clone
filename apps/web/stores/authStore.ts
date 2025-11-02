@@ -84,14 +84,14 @@ export const useAuthStore = create<AuthStore>()(
         // Better Auth integration methods
         initializeSession: async () => {
           const currentState = useAuthStore.getState();
-          
+
           // If we already have user and token from persisted state, we're good
           if (currentState.user && currentState.token) {
             console.log('[Auth] Session restored from localStorage');
             set({ isLoading: false, isAuthenticated: true });
             return;
           }
-          
+
           // Otherwise, try to fetch from API if we have a token
           set({ isLoading: true });
           try {
@@ -105,20 +105,20 @@ export const useAuthStore = create<AuthStore>()(
               });
             } else {
               console.log('[Auth] No active session found');
-              set({ 
+              set({
                 user: null,
                 token: null,
                 isAuthenticated: false,
-                isLoading: false 
+                isLoading: false,
               });
             }
           } catch (error) {
             console.error('Failed to initialize session:', error);
-            set({ 
+            set({
               user: null,
               token: null,
               isAuthenticated: false,
-              isLoading: false 
+              isLoading: false,
             });
           }
         },

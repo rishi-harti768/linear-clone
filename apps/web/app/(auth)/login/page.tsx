@@ -1,12 +1,12 @@
 'use client';
 
+import { AlertCircle, CheckCircle2, Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuthStore } from '@/stores/authStore';
-import { Eye, EyeOff, Mail, Lock, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -66,10 +66,11 @@ export default function LoginPage() {
     }
   };
 
-  const handleInputChange = (field: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-    if (error) setError(null);
-  };
+  const handleInputChange =
+    (field: 'email' | 'password') => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+      if (error) setError(null);
+    };
 
   const handleBlur = (field: 'email' | 'password') => () => {
     setTouched((prev) => ({ ...prev, [field]: true }));
@@ -85,9 +86,7 @@ export default function LoginPage() {
         <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
           Welcome back
         </h1>
-        <p className="text-muted-foreground">
-          Sign in to your account to continue your work
-        </p>
+        <p className="text-muted-foreground">Sign in to your account to continue your work</p>
       </div>
 
       {/* Error Alert */}

@@ -95,16 +95,9 @@ export function useKeyboardShortcuts() {
     const handleKeyDown = (event: KeyboardEvent) => {
       // Ignore shortcuts when typing in input fields
       const target = event.target as HTMLElement;
-      if (
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
-        target.isContentEditable
-      ) {
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
         // Allow Escape and Cmd+K/Ctrl+K even in input fields
-        if (
-          event.key === 'Escape' ||
-          ((event.metaKey || event.ctrlKey) && event.key === 'k')
-        ) {
+        if (event.key === 'Escape' || ((event.metaKey || event.ctrlKey) && event.key === 'k')) {
           // Continue to process these shortcuts
         } else {
           return;
@@ -117,13 +110,7 @@ export function useKeyboardShortcuts() {
         const ctrlMatch = shortcut.ctrlKey ? event.ctrlKey : !event.ctrlKey;
         const shiftMatch = shortcut.shiftKey ? event.shiftKey : !event.shiftKey;
 
-        if (
-          event.key === shortcut.key &&
-          metaMatch &&
-          ctrlMatch &&
-          shiftMatch &&
-          !event.altKey
-        ) {
+        if (event.key === shortcut.key && metaMatch && ctrlMatch && shiftMatch && !event.altKey) {
           event.preventDefault();
           shortcut.handler();
           return;
@@ -145,9 +132,7 @@ export function useKeyboardShortcuts() {
         // Check if sequence matches
         for (const shortcut of sequenceShortcuts) {
           if (sequenceBuffer.length === shortcut.sequence.length) {
-            const match = shortcut.sequence.every(
-              (key, index) => key === sequenceBuffer[index]
-            );
+            const match = shortcut.sequence.every((key, index) => key === sequenceBuffer[index]);
             if (match) {
               event.preventDefault();
               shortcut.handler();

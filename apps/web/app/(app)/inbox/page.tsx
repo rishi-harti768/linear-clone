@@ -1,20 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
+  Archive,
   Bell,
+  Calendar,
+  Check,
   CheckCircle2,
   MessageSquare,
-  UserPlus,
-  Calendar,
-  AlertCircle,
-  Check,
-  Archive,
   MoreHorizontal,
+  UserPlus,
 } from 'lucide-react';
+import { useState } from 'react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 type NotificationType = 'mention' | 'assignment' | 'comment' | 'update';
 type FilterType = 'all' | 'unread' | 'mentions';
@@ -133,11 +132,10 @@ export default function InboxPage() {
       {/* Filters */}
       <div className="flex items-center gap-2 bg-muted/50 p-1 rounded-lg w-fit">
         <button
+          type="button"
           onClick={() => setFilter('all')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-            filter === 'all'
-              ? 'bg-background shadow-sm'
-              : 'hover:bg-background/50'
+            filter === 'all' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
           }`}
         >
           All
@@ -146,11 +144,10 @@ export default function InboxPage() {
           </Badge>
         </button>
         <button
+          type="button"
           onClick={() => setFilter('unread')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-            filter === 'unread'
-              ? 'bg-background shadow-sm'
-              : 'hover:bg-background/50'
+            filter === 'unread' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
           }`}
         >
           Unread
@@ -161,11 +158,10 @@ export default function InboxPage() {
           )}
         </button>
         <button
+          type="button"
           onClick={() => setFilter('mentions')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-            filter === 'mentions'
-              ? 'bg-background shadow-sm'
-              : 'hover:bg-background/50'
+            filter === 'mentions' ? 'bg-background shadow-sm' : 'hover:bg-background/50'
           }`}
         >
           Mentions
@@ -188,9 +184,11 @@ export default function InboxPage() {
             >
               <div className="flex items-start gap-4">
                 {/* Icon */}
-                <div className={`p-3 rounded-lg flex-shrink-0 ${
-                  !notification.read ? 'bg-primary/10' : 'bg-muted'
-                }`}>
+                <div
+                  className={`p-3 rounded-lg flex-shrink-0 ${
+                    !notification.read ? 'bg-primary/10' : 'bg-muted'
+                  }`}
+                >
                   {getNotificationIcon(notification.type)}
                 </div>
 
@@ -220,9 +218,7 @@ export default function InboxPage() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-muted-foreground italic">
-                    {notification.description}
-                  </p>
+                  <p className="text-sm text-muted-foreground italic">{notification.description}</p>
 
                   {/* Actions */}
                   <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">

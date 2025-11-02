@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { CommandPalette } from '@/components/CommandPalette';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { TopNav } from '@/components/layout/TopNav';
-import { CommandPalette } from '@/components/CommandPalette';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { useMockData } from '@/hooks/useMockData';
-import { useAuthStore, useAuthLoading } from '@/stores/authStore';
+import { useAuthLoading, useAuthStore } from '@/stores/authStore';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   // Initialize keyboard shortcuts
   useKeyboardShortcuts();
-  
+
   // Initialize mock data (TODO: Remove when API is integrated)
   useMockData();
 
@@ -58,9 +58,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <TopNav />
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto bg-background">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto bg-background">{children}</main>
       </div>
 
       {/* Command Palette (⌘K) */}

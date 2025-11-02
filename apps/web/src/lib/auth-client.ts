@@ -39,7 +39,7 @@ export const authAdapter = {
     console.log('[Auth] Registering user:', { email: data.email, name: data.name });
     const url = `${baseURL}/api/v1/auth/register`;
     console.log('[Auth] POST', url);
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -68,7 +68,7 @@ export const authAdapter = {
     console.log('[Auth] Logging in user:', data.email);
     const url = `${baseURL}/api/v1/auth/login`;
     console.log('[Auth] POST', url);
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
