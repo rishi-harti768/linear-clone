@@ -132,24 +132,43 @@ export const authAdapter = {
     }
 
     console.log('[Auth] Getting current user');
-    const response = await fetch(`${baseURL}/api/v1/auth/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      credentials: 'include',
-    });
 
-    if (!response.ok) {
-      console.error('[Auth] Get current user failed:', response.status);
-      // Token might be expired or invalid
-      localStorage.removeItem('authToken');
-      return null;
+    try {
+      const response = await fetch(`${baseURL}/api/v1/auth/me`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const status = response.status;
+        console.error('[Auth] Get current user failed:', status);
+
+        // Only clear token on 401 Unauthorized (invalid/expired token)
+        // Keep token for network errors (500, timeout) to prevent unnecessary logouts
+        if (status === 401 || status === 403) {
+          console.warn('[Auth] Token invalid or expired - clearing');
+          localStorage.removeItem('authToken');
+          return null;
+        }
+
+        // For other errors (network issues, 500, etc), keep the token
+        // User will stay logged in and can retry
+        console.warn('[Auth] Network/server error - keeping session active');
+        throw new Error(`API error: ${status}`);
+      }
+
+      const data = await response.json();
+      console.log('[Auth] Current user retrieved');
+      return data.data.user;
+    } catch (error) {
+      // Network errors, CORS issues, etc.
+      console.warn('[Auth] Request failed but keeping session:', error);
+      // Don't clear token on network errors
+      throw error;
     }
-
-    const data = await response.json();
-    console.log('[Auth] Current user retrieved');
-    return data.data.user;
   },
 };

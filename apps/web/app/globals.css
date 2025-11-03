@@ -188,16 +188,16 @@ body::-webkit-scrollbar {
   --font-size-title2: 1.5rem;
   --font-size-title3: 1.25rem;
 
-  --header-bg: hsla(0, 0%, 100%, 0.8);
-  --header-border: hsla(0, 0%, 0%, 0.1);
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f8f8;
-  --color-bg-tertiary: #f0f0f0;
-  --color-border-primary: #e5e5e5;
-  --color-border-secondary: #d4d4d4;
-  --color-text-primary: #171717;
-  --color-text-secondary: #404040;
-  --color-text-tertiary: #737373;
+  --header-bg: hsla(0, 0%, 0%, 0.8);
+  --header-border: hsla(0, 0%, 100%, 0.1);
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #121212;
+  --color-border-primary: #1a1a1a;
+  --color-border-secondary: #262626;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e5e5e5;
+  --color-text-tertiary: #a3a3a3;
 }
 
 @media (max-width: 768px) {

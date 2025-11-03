@@ -13,20 +13,26 @@ import {
   Search,
 } from 'lucide-react';
 import { useState } from 'react';
+import { IssueForm } from '@/components/issues/IssueForm';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { issueApi } from '@/lib/api';
 import { useIssueStore } from '@/stores/issueStore';
+import { useTeamStore } from '@/stores/team-store';
 
 type ViewMode = 'list' | 'board';
 type FilterType = 'all' | 'active' | 'completed';
 
 export default function IssuesPage() {
-  const { issues } = useIssueStore();
+  const { issues, addIssue } = useIssueStore();
+  const teams = useTeamStore((state) => state.teams);
+  const activeTeam = teams[0]; // Get first team for now
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   // Mock issues data (replace with real data from store)
   const mockIssues = [
@@ -158,7 +164,10 @@ export default function IssuesPage() {
             {filteredIssues.length} {filteredIssues.length === 1 ? 'issue' : 'issues'}
           </p>
         </div>
-        <Button className="gap-2 shadow-lg shadow-primary/20 group">
+        <Button
+          className="gap-2 shadow-lg shadow-primary/20 group"
+          onClick={() => setIsCreateModalOpen(true)}
+        >
           <Plus className="h-4 w-4 group-hover:rotate-90 transition-transform duration-300" />
           New Issue
         </Button>
@@ -309,12 +318,31 @@ export default function IssuesPage() {
             </p>
           </div>
           {!searchQuery && (
-            <Button className="gap-2 mt-4">
+            <Button className="gap-2 mt-4" onClick={() => setIsCreateModalOpen(true)}>
               <Plus className="h-4 w-4" />
               Create Issue
             </Button>
           )}
         </div>
+      )}
+
+      {/* Create Issue Modal */}
+      {activeTeam && (
+        <IssueForm
+          isOpen={isCreateModalOpen}
+          onClose={() => setIsCreateModalOpen(false)}
+          onSubmit={async (data) => {
+            try {
+              const response = await issueApi.create(activeTeam.id, data as any);
+              addIssue(response.data as any);
+              setIsCreateModalOpen(false);
+            } catch (error) {
+              console.error('Failed to create issue:', error);
+            }
+          }}
+          mode="create"
+          teamId={activeTeam.id}
+        />
       )}
     </div>
   );

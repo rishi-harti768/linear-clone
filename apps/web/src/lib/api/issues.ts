@@ -148,6 +148,29 @@ export const issueApi = {
     apiClient.post<ApiResponse<Comment>>(`/issues/${id}/comments`, data),
 
   /**
+   * Update comment
+   */
+  updateComment: (commentId: string, body: string) =>
+    apiClient.patch<ApiResponse<Comment>>(`/comments/${commentId}`, { body }),
+
+  /**
+   * Delete comment
+   */
+  deleteComment: (commentId: string) => apiClient.delete<void>(`/comments/${commentId}`),
+
+  /**
+   * Add reaction to comment
+   */
+  addReaction: (commentId: string, emoji: string) =>
+    apiClient.post<ApiResponse<void>>(`/comments/${commentId}/reactions`, { emoji }),
+
+  /**
+   * Remove reaction from comment
+   */
+  removeReaction: (commentId: string, emoji: string) =>
+    apiClient.delete<void>(`/comments/${commentId}/reactions/${emoji}`),
+
+  /**
    * Get issue activity
    */
   getActivity: (id: string) => apiClient.get<ApiResponse<ActivityLog[]>>(`/issues/${id}/activity`),

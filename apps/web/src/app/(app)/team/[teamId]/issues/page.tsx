@@ -4,7 +4,7 @@ import { LayoutGrid, List, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { IssueFilters } from '@/components/issues/IssueFilters';
-import { IssueRow } from '@/components/issues/IssueRow';
+import { VirtualizedIssueList } from '@/components/issues/VirtualizedIssueList';
 import { Button } from '@/components/ui/button';
 import { useIssueStore } from '@/stores/issue-store';
 import { useTeamStore } from '@/stores/team-store';
@@ -133,10 +133,10 @@ export default function IssuesPage({ params }: PageProps) {
           <div className="text-xs font-medium text-text-tertiary uppercase">Due Date</div>
         </div>
 
-        {/* Table Body */}
-        <div>
+        {/* Table Body - Virtualized */}
+        <div className="flex-1 overflow-hidden">
           {issueList.length > 0 ? (
-            issueList.map((issue) => <IssueRow key={issue.id} issue={issue} teamId={teamId} />)
+            <VirtualizedIssueList issues={issueList} teamId={teamId} />
           ) : (
             <div className="flex flex-col items-center justify-center py-12">
               <p className="text-text-secondary">No issues found</p>
