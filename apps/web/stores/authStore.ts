@@ -56,7 +56,7 @@ export const useAuthStore = create<AuthStore>()(
         user: null,
         token: null,
         isAuthenticated: false,
-        isLoading: false,
+        isLoading: true, // Start as true to prevent premature redirects
 
         // Actions
         setUser: (user) => set({ user, isAuthenticated: user !== null }),
@@ -85,10 +85,17 @@ export const useAuthStore = create<AuthStore>()(
         initializeSession: async () => {
           const currentState = useAuthStore.getState();
 
-          // If we already have user and token from persisted state, we're good
+          // If we already have user and token from persisted state, trust it
+          // Only validate once on app startup, not on every navigation
           if (currentState.user && currentState.token) {
             console.log('[Auth] Session restored from localStorage');
             set({ isLoading: false, isAuthenticated: true });
+
+            // Optionally validate token in background (non-blocking)
+            authAdapter.getCurrentUser().catch(() => {
+              console.warn('[Auth] Background token validation failed - keeping session active');
+              // Don't force logout on validation failure unless user actively navigates
+            });
             return;
           }
 
@@ -98,8 +105,10 @@ export const useAuthStore = create<AuthStore>()(
             const user = await authAdapter.getCurrentUser();
             if (user) {
               console.log('[Auth] Session initialized from API');
+              const storedToken = localStorage.getItem('authToken');
               set({
                 user,
+                token: storedToken,
                 isAuthenticated: true,
                 isLoading: false,
               });
@@ -129,7 +138,7 @@ export const useAuthStore = create<AuthStore>()(
             const response = await authAdapter.login({ email, password });
             const { user, token } = response.data;
 
-            // Store token in localStorage
+            // Store token in localStorage AND Zustand store (double persistence)
             localStorage.setItem('authToken', token);
 
             set({
@@ -138,6 +147,8 @@ export const useAuthStore = create<AuthStore>()(
               isAuthenticated: true,
               isLoading: false,
             });
+
+            console.log('[Auth] Login successful, token persisted');
           } catch (error) {
             set({ isLoading: false });
             throw error;
@@ -150,7 +161,7 @@ export const useAuthStore = create<AuthStore>()(
             const response = await authAdapter.register({ email, password, name });
             const { user, token } = response.data;
 
-            // Store token in localStorage
+            // Store token in localStorage AND Zustand store (double persistence)
             localStorage.setItem('authToken', token);
 
             set({
@@ -159,6 +170,8 @@ export const useAuthStore = create<AuthStore>()(
               isAuthenticated: true,
               isLoading: false,
             });
+
+            console.log('[Auth] Registration successful, token persisted');
           } catch (error) {
             set({ isLoading: false });
             throw error;
@@ -169,15 +182,23 @@ export const useAuthStore = create<AuthStore>()(
           set({ isLoading: true });
           try {
             await authAdapter.logout();
+
+            // Clear both localStorage AND Zustand store
+            localStorage.removeItem('authToken');
+
             set({
               user: null,
               token: null,
               isAuthenticated: false,
               isLoading: false,
             });
+
+            console.log('[Auth] Logout successful');
           } catch (error) {
             console.error('Logout error:', error);
             // Force logout even if API call fails
+            localStorage.removeItem('authToken');
+
             set({
               user: null,
               token: null,
@@ -194,6 +215,22 @@ export const useAuthStore = create<AuthStore>()(
           token: state.token, // TODO: Remove from localStorage in production, use httpOnly cookies
           isAuthenticated: state.isAuthenticated,
         }),
+        // Sync localStorage with Zustand on hydration
+        onRehydrateStorage: () => (state) => {
+          if (state) {
+            // Ensure localStorage token matches Zustand token
+            const storedToken = localStorage.getItem('authToken');
+            if (storedToken && state.token !== storedToken) {
+              console.log('[Auth] Syncing token from localStorage to Zustand');
+              state.token = storedToken;
+            }
+            console.log('[Auth] State rehydrated:', {
+              hasUser: !!state.user,
+              hasToken: !!state.token,
+              isAuthenticated: state.isAuthenticated,
+            });
+          }
+        },
       }
     ),
     { name: 'AuthStore' }
